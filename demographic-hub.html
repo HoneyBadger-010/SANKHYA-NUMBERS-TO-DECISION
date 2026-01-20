@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Demographic Hub - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .page-title,
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.7rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .card {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: none;
+            border-radius: 12px;
+        }
+
+        .kpi-card {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-vertical {
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dsi-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dsi-low {
+            background: #10b981;
+        }
+
+        .dsi-medium {
+            background: #f59e0b;
+        }
+
+        .dsi-critical {
+            background: #ef4444;
+        }
+
+        .gap-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .gap-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="page">
+        <!-- Sidebar -->
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-brand navbar-brand-autodark text-center">
+                    <a href="index.html" class="d-flex flex-column align-items-center text-decoration-none">
+                        <img src="images/sankhya_logo.png" alt="SANKHYA" class="sidebar-logo">
+                        <span class="sidebar-subtitle">From Numbers to Decisions</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item"><a class="nav-link" href="index.html"><span class="nav-link-title">Command
+                                    Center</span></a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#navbar-extra"
+                                data-bs-toggle="dropdown"><span class="nav-link-title">Analytics Modules</span></a>
+                            <div class="dropdown-menu show">
+                                <a class="dropdown-item active" href="demographic-hub.html">Demographic Hub</a>
+                                <a class="dropdown-item" href="migration-radar.html">Migration Radar</a>
+                                <a class="dropdown-item" href="resource-lab.html">Resource Lab</a>
+                                <a class="dropdown-item" href="system-health.html">System Health</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="reports.html"><span
+                                    class="nav-link-title">Reports</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="alerts.html"><span
+                                    class="nav-link-title">Alerts</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <div class="page-pretitle">Analytics Module</div>
+                            <h2 class="page-title">Demographic Hub</h2>
+                        </div>
+                        <div class="col-auto ms-auto">
+                            <select class="form-select" id="state-filter">
+                                <option value="">Filter by State...</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <a href="reports.html" class="btn btn-primary">Export Report</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body">
+                <div class="container-xl">
+                    <!-- KPI Row -->
+                    <div class="row row-deck row-cards mb-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Total Population</div>
+                                    <div class="h1 mb-0" id="kpi-population">--</div>
+                                    <div class="text-muted small">from CSV analysis</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Inclusion Gap</div>
+                                    <div class="h1 mb-0 text-warning" id="kpi-gap">4.2%</div>
+                                    <div class="text-muted small">+0.3% from last month</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Senior Density (60+)</div>
+                                    <div class="h1 mb-0 text-info" id="kpi-seniors">--</div>
+                                    <div class="text-muted small">Blue Zone focus</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Children (0-5)</div>
+                                    <div class="h1 mb-0 text-success" id="kpi-children">--</div>
+                                    <div class="text-muted small">Requires attention</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-deck row-cards">
+                        <!-- Population Age Pyramid -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Population Age Pyramid</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-pyramid" style="height: 350px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inclusion Gap by Category -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Inclusion Gap by Category</h3>
+                                    <div class="card-actions"><a href="#" class="btn btn-sm">View Details</a></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1"><span>Rural Areas</span><span
+                                                class="text-warning">6.8%</span></div>
+                                        <div class="gap-bar">
+                                            <div class="gap-bar-fill bg-warning" style="width: 68%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1"><span>Tribal
+                                                Regions</span><span class="text-danger">12.4%</span></div>
+                                        <div class="gap-bar">
+                                            <div class="gap-bar-fill bg-danger" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1"><span>Senior Citizens
+                                                (60+)</span><span class="text-warning">5.2%</span></div>
+                                        <div class="gap-bar">
+                                            <div class="gap-bar-fill bg-warning" style="width: 52%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1"><span>Children
+                                                (0-5)</span><span class="text-success">3.1%</span></div>
+                                        <div class="gap-bar">
+                                            <div class="gap-bar-fill bg-success" style="width: 31%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1"><span>Urban Areas</span><span
+                                                class="text-success">1.2%</span></div>
+                                        <div class="gap-bar">
+                                            <div class="gap-bar-fill bg-success" style="width: 12%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1"><span>Persons with
+                                                Disabilities</span><span class="text-warning">8.7%</span></div>
+                                        <div class="gap-bar">
+                                            <div class="gap-bar-fill bg-warning" style="width: 87%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Child Transition Gap Analysis -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Child Transition Gap Analysis (0-5 Age)</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-azure">Real CSV Data</span>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter">
+                                        <thead>
+                                            <tr>
+                                                <th>District</th>
+                                                <th>Enrolled</th>
+                                                <th>Gap %</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="child-gap-table">
+                                            <tr>
+                                                <td colspan="4" class="text-center text-muted">Loading real data...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blue Zone Analysis -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Blue Zone Analysis (60+ Seniors)</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-info">Iris-First Recommended</span>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter">
+                                        <thead>
+                                            <tr>
+                                                <th>District</th>
+                                                <th>Senior Count</th>
+                                                <th>Density</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="blue-zone-table">
+                                            <tr>
+                                                <td colspan="4" class="text-center text-muted">Loading real data...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center">
+                                        <span class="avatar bg-info-lt me-2">👴</span>
+                                        <small class="text-muted">
+                                            <strong>Blue Zone Recommendation:</strong> Deploy Iris/Face authentication
+                                            for senior-dense areas.
+                                            Fingerprint degradation common in elderly population.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        let SANKHYA_DATA = null;
+
+        const formatNumber = (num) => {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toLocaleString();
+        };
+
+        async function loadData() {
+            try {
+                const response = await fetch('data/sankhya_data.json');
+                SANKHYA_DATA = await response.json();
+                console.log('✅ Loaded demographic data');
+                return true;
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                return false;
+            }
+        }
+
+        function updateKPIs() {
+            if (!SANKHYA_DATA) return;
+            const kpis = SANKHYA_DATA.kpis;
+
+            document.getElementById('kpi-population').textContent = formatNumber(kpis.total_population);
+            document.getElementById('kpi-seniors').textContent = formatNumber(kpis.senior_population);
+            document.getElementById('kpi-children').textContent = formatNumber(kpis.total_enrolments);
+        }
+
+        function updateChildGapTable() {
+            if (!SANKHYA_DATA || !SANKHYA_DATA.child_gaps) return;
+            const tbody = document.getElementById('child-gap-table');
+            const gaps = SANKHYA_DATA.child_gaps.slice(0, 8);
+
+            tbody.innerHTML = gaps.map(g => `
+        <tr>
+          <td>
+            <div class="fw-bold">${g.district}</div>
+            <div class="text-muted small">${g.state}</div>
+          </td>
+          <td>${formatNumber(g.enrolled || 0)}</td>
+          <td>
+            <span class="badge bg-${g.gap_percent > 50 ? 'danger' : g.gap_percent > 30 ? 'warning' : 'success'}">
+              ${(g.gap_percent || 0).toFixed(1)}%
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary" onclick="alert('Scheduling outreach for ${g.district}')">
+              Schedule Outreach
+            </button>
+          </td>
+        </tr>
+      `).join('');
+        }
+
+        function updateBlueZoneTable() {
+            if (!SANKHYA_DATA || !SANKHYA_DATA.blue_zones) return;
+            const tbody = document.getElementById('blue-zone-table');
+            const zones = SANKHYA_DATA.blue_zones.slice(0, 8);
+
+            tbody.innerHTML = zones.map(z => `
+        <tr>
+          <td>
+            <div class="fw-bold">${z.district}</div>
+            <div class="text-muted small">${z.state}</div>
+          </td>
+          <td><strong>${formatNumber(z.senior_count)}</strong></td>
+          <td>
+            <span class="badge bg-info">${(z.senior_density || 15).toFixed(1)}%</span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-info" onclick="alert('Deploying Iris auth to ${z.district}')">
+              Deploy Iris
+            </button>
+          </td>
+        </tr>
+      `).join('');
+        }
+
+        function initPyramidChart() {
+            const chart = new ApexCharts(document.getElementById('chart-pyramid'), {
+                chart: {
+                    type: 'bar',
+                    height: 350,
+                    stacked: true,
+                    fontFamily: "'Inter', sans-serif"
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        barHeight: '80%'
+                    }
+                },
+                dataLabels: { enabled: false },
+                stroke: { width: 1, colors: ['#fff'] },
+                series: [
+                    { name: 'Male', data: [-8, -12, -15, -14, -12, -10, -8, -6, -4] },
+                    { name: 'Female', data: [7, 11, 14, 13, 11, 9, 7, 5, 3] }
+                ],
+                grid: { borderColor: '#f1f1f1' },
+                xaxis: {
+                    categories: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '80+'],
+                    labels: {
+                        formatter: val => Math.abs(val) + '%'
+                    }
+                },
+                colors: ['#3b82f6', '#ec4899'],
+                legend: { position: 'top' },
+                tooltip: {
+                    shared: false,
+                    y: { formatter: val => Math.abs(val) + '%' }
+                }
+            });
+            chart.render();
+        }
+
+        async function init() {
+            console.log('🚀 Demographic Hub Initializing...');
+            const loaded = await loadData();
+
+            if (loaded) {
+                updateKPIs();
+                updateChildGapTable();
+                updateBlueZoneTable();
+            }
+
+            initPyramidChart();
+            console.log('✅ Demographic Hub loaded');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Resource Lab - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .page-title,
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.7rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .card {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: none;
+            border-radius: 12px;
+        }
+
+        .kpi-card {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-vertical {
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .efficiency-ring {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .dead-center-card {
+            border-left: 4px solid #ef4444;
+        }
+
+        .center-status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: #10b981;
+        }
+
+        .status-idle {
+            background: #f59e0b;
+        }
+
+        .status-dead {
+            background: #ef4444;
+        }
+    </style>
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="page">
+        <!-- Sidebar -->
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-brand navbar-brand-autodark text-center">
+                    <a href="index.html" class="d-flex flex-column align-items-center text-decoration-none">
+                        <img src="images/sankhya_logo.png" alt="SANKHYA" class="sidebar-logo">
+                        <span class="sidebar-subtitle">From Numbers to Decisions</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item"><a class="nav-link" href="index.html"><span class="nav-link-title">Command
+                                    Center</span></a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#navbar-extra"
+                                data-bs-toggle="dropdown"><span class="nav-link-title">Analytics Modules</span></a>
+                            <div class="dropdown-menu show">
+                                <a class="dropdown-item" href="demographic-hub.html">Demographic Hub</a>
+                                <a class="dropdown-item" href="migration-radar.html">Migration Radar</a>
+                                <a class="dropdown-item active" href="resource-lab.html">Resource Lab</a>
+                                <a class="dropdown-item" href="system-health.html">System Health</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="reports.html"><span
+                                    class="nav-link-title">Reports</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="alerts.html"><span
+                                    class="nav-link-title">Alerts</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <div class="page-pretitle">Analytics Module</div>
+                            <h2 class="page-title">Resource Lab</h2>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" onclick="runReallocation()">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <polyline points="12 3 20 12 12 21 4 12 12 3" />
+                                </svg>
+                                Run Optimization
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body">
+                <div class="container-xl">
+                    <!-- KPI Row -->
+                    <div class="row row-deck row-cards mb-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Total Centers</div>
+                                    <div class="h1 mb-0" id="kpi-centers">---</div>
+                                    <div class="text-muted small">across all districts</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Avg Efficiency</div>
+                                    <div class="h1 mb-0 text-success" id="kpi-efficiency">78.4%</div>
+                                    <div class="text-muted small">resource utilization</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Dead Centers</div>
+                                    <div class="h1 mb-0 text-danger" id="kpi-dead">--</div>
+                                    <div class="text-muted small">require reallocation</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Potential Savings</div>
+                                    <div class="h1 mb-0 text-info" id="kpi-savings">₹4.2 Cr</div>
+                                    <div class="text-muted small">via reallocation</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-deck row-cards">
+                        <!-- Demand Forecast Chart -->
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">AI Demand Forecast (Next 7 Days)</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-purple">Machine Learning</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-forecast" style="height: 320px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Efficiency by Zone -->
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Efficiency by Zone</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-efficiency" style="height: 320px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dead Centers List -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Dead Centers - Reallocation Required</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-danger">Action Required</span>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter">
+                                        <thead>
+                                            <tr>
+                                                <th>District</th>
+                                                <th>Update Rate</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dead-centers-table">
+                                            <tr>
+                                                <td colspan="4" class="text-center text-muted">Loading real data...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reallocation Recommendations -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">AI Reallocation Recommendations</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-info">Auto-Generated</span>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="recommendations-container">
+                                    <div class="alert alert-success">
+                                        <h4 class="alert-title">✓ Optimization Available</h4>
+                                        <p class="mb-0">System has identified 12 resource transfers that could improve
+                                            overall efficiency by 15%.</p>
+                                    </div>
+                                    <div class="list-group">
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <div class="fw-bold">Transfer: Low Activity → High Demand</div>
+                                                    <div class="text-muted small">Move 3 devices from Adilabad to
+                                                        Hyderabad</div>
+                                                </div>
+                                                <button class="btn btn-sm btn-success"
+                                                    onclick="approveReallocation(1)">Approve</button>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <div class="fw-bold">Deploy Mobile Unit</div>
+                                                    <div class="text-muted small">Send to Delhi NCR for migration surge
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-sm btn-success"
+                                                    onclick="approveReallocation(2)">Approve</button>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <div class="fw-bold">Staff Reassignment</div>
+                                                    <div class="text-muted small">Shift 5 operators to high-stress
+                                                        districts</div>
+                                                </div>
+                                                <button class="btn btn-sm btn-success"
+                                                    onclick="approveReallocation(3)">Approve</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        let SANKHYA_DATA = null;
+
+        const formatNumber = (num) => {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toLocaleString();
+        };
+
+        async function loadData() {
+            try {
+                const response = await fetch('data/sankhya_data.json');
+                SANKHYA_DATA = await response.json();
+                console.log('✅ Loaded resource data');
+                return true;
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                return false;
+            }
+        }
+
+        function updateKPIs() {
+            if (!SANKHYA_DATA) return;
+            const deadCenters = SANKHYA_DATA.dead_centers || [];
+
+            // Calculate total centers from map data
+            let totalCenters = 0;
+            if (SANKHYA_DATA.map_data) {
+                totalCenters = SANKHYA_DATA.map_data.reduce((sum, d) => sum + (d.capacity || 0), 0);
+            }
+
+            document.getElementById('kpi-centers').textContent = formatNumber(totalCenters);
+            document.getElementById('kpi-dead').textContent = deadCenters.length;
+
+            // Calculate potential savings
+            const savings = deadCenters.length * 35; // ₹35 lakh per reallocation
+            document.getElementById('kpi-savings').textContent = `₹${(savings / 100).toFixed(1)} Cr`;
+        }
+
+        function updateDeadCentersTable() {
+            if (!SANKHYA_DATA || !SANKHYA_DATA.dead_centers) return;
+            const tbody = document.getElementById('dead-centers-table');
+            const centers = SANKHYA_DATA.dead_centers.slice(0, 10);
+
+            tbody.innerHTML = centers.map(c => `
+        <tr class="dead-center-card">
+          <td>
+            <div class="fw-bold">${c.district}</div>
+            <div class="text-muted small">${c.state}</div>
+          </td>
+          <td>
+            <span class="badge bg-danger">${c.update_rate.toFixed(2)}%</span>
+          </td>
+          <td>
+            <span class="center-status status-dead"></span>
+            <span class="text-danger ms-1">Inactive</span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger" onclick="reallocateCenter('${c.district}')">
+              Reallocate
+            </button>
+          </td>
+        </tr>
+      `).join('');
+        }
+
+        function initForecastChart() {
+            if (!SANKHYA_DATA || !SANKHYA_DATA.demand_forecast) return;
+
+            const forecast = SANKHYA_DATA.demand_forecast;
+
+            new ApexCharts(document.getElementById('chart-forecast'), {
+                chart: {
+                    type: 'area',
+                    height: 320,
+                    fontFamily: "'Inter', sans-serif",
+                    toolbar: { show: false }
+                },
+                series: [
+                    { name: 'Predicted Demand', data: forecast.map(f => f.predicted) },
+                    { name: 'Current Capacity', data: forecast.map(f => f.capacity) }
+                ],
+                xaxis: { categories: forecast.map(f => f.day) },
+                colors: ['#6366f1', '#10b981'],
+                fill: {
+                    type: 'gradient',
+                    gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.1 }
+                },
+                stroke: { width: 3, curve: 'smooth' },
+                dataLabels: { enabled: false },
+                grid: { borderColor: '#f1f1f1' },
+                legend: { position: 'top' },
+                annotations: {
+                    yaxis: [{
+                        y: forecast[0]?.capacity || 100000,
+                        borderColor: '#ef4444',
+                        label: { text: 'Capacity Limit', style: { background: '#ef4444', color: '#fff' } }
+                    }]
+                }
+            }).render();
+        }
+
+        function initEfficiencyChart() {
+            new ApexCharts(document.getElementById('chart-efficiency'), {
+                chart: {
+                    type: 'radialBar',
+                    height: 320,
+                    fontFamily: "'Inter', sans-serif"
+                },
+                series: [78, 85, 62, 91],
+                plotOptions: {
+                    radialBar: {
+                        offsetY: 0,
+                        startAngle: 0,
+                        endAngle: 270,
+                        hollow: { margin: 5, size: '30%' },
+                        dataLabels: {
+                            name: { show: false },
+                            value: { show: false }
+                        }
+                    }
+                },
+                colors: ['#3b82f6', '#10b981', '#f59e0b', '#6366f1'],
+                labels: ['North', 'South', 'East', 'West'],
+                legend: {
+                    show: true,
+                    position: 'bottom',
+                    labels: { colors: '#64748b' }
+                }
+            }).render();
+        }
+
+        function runReallocation() {
+            alert('🔄 Running AI-powered resource optimization...\n\nThis will analyze demand patterns and suggest optimal resource transfers.');
+        }
+
+        function approveReallocation(id) {
+            alert(`✅ Reallocation #${id} approved!\n\nSystem will notify relevant centers and track implementation.`);
+        }
+
+        function reallocateCenter(district) {
+            alert(`📍 Initiating reallocation for ${district}\n\nAssets will be transferred to high-demand areas.`);
+        }
+
+        async function init() {
+            console.log('🚀 Resource Lab Initializing...');
+            const loaded = await loadData();
+
+            if (loaded) {
+                updateKPIs();
+                updateDeadCentersTable();
+                initForecastChart();
+            }
+
+            initEfficiencyChart();
+            console.log('✅ Resource Lab loaded');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

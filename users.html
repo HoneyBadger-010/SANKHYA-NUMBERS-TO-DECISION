@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Users - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+    <div class="page">
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <h1 class="navbar-brand"><a href="index.html"><span class="text-white fw-bold fs-3">संख्या</span><span
+                            class="badge bg-primary ms-2">SANKHYA</span></a></h1>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Command Center</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="users.html">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <h2 class="page-title">User Management</h2>
+                        </div>
+                        <div class="col-auto">
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-user">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 5l0 14" />
+                                    <path d="M5 12l14 0" />
+                                </svg>
+                                Add User
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-cards mb-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="text-secondary small">Total Users</div>
+                                    <div class="h1 mb-0">1,247</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="text-secondary small">Admins</div>
+                                    <div class="h1 mb-0 text-primary">24</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="text-secondary small">Operators</div>
+                                    <div class="h1 mb-0 text-success">856</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="text-secondary small">Viewers</div>
+                                    <div class="h1 mb-0">367</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Users</h3>
+                            <div class="card-actions">
+                                <div class="input-group input-group-sm" style="width:200px;">
+                                    <input type="text" class="form-control" placeholder="Search users...">
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table card-table table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Role</th>
+                                    <th>Region</th>
+                                    <th>Status</th>
+                                    <th>Last Active</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-sm me-2"
+                                                style="background-image: url(https://ui-avatars.com/api/?name=Admin+User&background=206bc4&color=fff)"></span>
+                                            <div>
+                                                <div class="fw-bold">Admin User</div>
+                                                <div class="text-secondary small">admin@sankhya.gov.in</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-primary">Administrator</span></td>
+                                    <td>North India</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td class="text-secondary">Just now</td>
+                                    <td><a href="#" class="btn btn-sm">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-sm me-2"
+                                                style="background-image: url(https://ui-avatars.com/api/?name=Sarah+Khan&background=2fb344&color=fff)"></span>
+                                            <div>
+                                                <div class="fw-bold">Sarah Khan</div>
+                                                <div class="text-secondary small">sarah.k@sankhya.gov.in</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-success">Operator</span></td>
+                                    <td>Central India</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td class="text-secondary">15 min ago</td>
+                                    <td><a href="#" class="btn btn-sm">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-sm me-2"
+                                                style="background-image: url(https://ui-avatars.com/api/?name=John+Doe&background=f76707&color=fff)"></span>
+                                            <div>
+                                                <div class="fw-bold">John Doe</div>
+                                                <div class="text-secondary small">john.d@sankhya.gov.in</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-success">Operator</span></td>
+                                    <td>East India</td>
+                                    <td><span class="badge bg-warning">Away</span></td>
+                                    <td class="text-secondary">2 hours ago</td>
+                                    <td><a href="#" class="btn btn-sm">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-sm me-2"
+                                                style="background-image: url(https://ui-avatars.com/api/?name=Priya+Sharma&background=7c3aed&color=fff)"></span>
+                                            <div>
+                                                <div class="fw-bold">Priya Sharma</div>
+                                                <div class="text-secondary small">priya.s@sankhya.gov.in</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-secondary">Viewer</span></td>
+                                    <td>South India</td>
+                                    <td><span class="badge bg-secondary">Offline</span></td>
+                                    <td class="text-secondary">1 day ago</td>
+                                    <td><a href="#" class="btn btn-sm">Edit</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="card-footer d-flex align-items-center">
+                            <p class="m-0 text-secondary">Showing 1 to 4 of 1,247</p>
+                            <ul class="pagination m-0 ms-auto">
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer footer-transparent d-print-none">
+                <div class="container-xl text-center">© 2026 SANKHYA/UIDAI</div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="modal-user" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New User</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3"><label class="form-label">Full Name</label><input type="text"
+                            class="form-control"></div>
+                    <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control">
+                    </div>
+                    <div class="mb-3"><label class="form-label">Role</label><select class="form-select">
+                            <option>Viewer</option>
+                            <option>Operator</option>
+                            <option>Administrator</option>
+                        </select></div>
+                    <div class="mb-3"><label class="form-label">Region</label><select class="form-select">
+                            <option>North India</option>
+                            <option>South India</option>
+                            <option>East India</option>
+                            <option>West India</option>
+                            <option>Central India</option>
+                        </select></div>
+                </div>
+                <div class="modal-footer"><button class="btn" data-bs-dismiss="modal">Cancel</button><button
+                        class="btn btn-primary">Create User</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+
+</html>

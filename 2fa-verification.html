@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>2FA Verification - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+
+        .verification-code input {
+            width: 3rem;
+            height: 3.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 0 0.25rem;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column bg-white with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            <div class="text-center mb-4">
+                <span class="fw-bold fs-1">संख्या</span>
+                <span class="badge bg-primary ms-2">SANKHYA</span>
+            </div>
+
+            <div class="card card-md">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <span class="avatar avatar-xl bg-primary-lt">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-lg" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+                                <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                <path d="M12 12l0 2.5" />
+                            </svg>
+                        </span>
+                    </div>
+                    <h2 class="h2 mb-4">Two-factor verification</h2>
+                    <p class="text-secondary mb-4">
+                        Enter the 6-digit code sent to your registered mobile/email.
+                    </p>
+                    <form action="index.html" method="get" autocomplete="off" novalidate>
+                        <div class="verification-code d-flex justify-content-center mb-4">
+                            <input type="text" class="form-control" maxlength="1" autofocus>
+                            <input type="text" class="form-control" maxlength="1">
+                            <input type="text" class="form-control" maxlength="1">
+                            <input type="text" class="form-control" maxlength="1">
+                            <input type="text" class="form-control" maxlength="1">
+                            <input type="text" class="form-control" maxlength="1">
+                        </div>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary w-100">Verify</button>
+                        </div>
+                    </form>
+                    <div class="mt-3">
+                        <span class="text-secondary">Didn't receive the code?</span>
+                        <a href="#" class="ms-1">Resend code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center text-secondary mt-3">
+                <a href="login.html">← Back to login</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+    <script>
+        // Auto-focus next input on entry
+        document.querySelectorAll('.verification-code input').forEach((input, index, inputs) => {
+            input.addEventListener('input', function () {
+                if (this.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

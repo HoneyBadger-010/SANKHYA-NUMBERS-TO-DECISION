@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Migration Radar - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .page-title,
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.7rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .card {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: none;
+            border-radius: 12px;
+        }
+
+        .kpi-card {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-vertical {
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        #migration-map {
+            height: 450px;
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .flow-arrow {
+            transition: all 0.3s ease;
+        }
+
+        .flow-arrow:hover {
+            transform: scale(1.05);
+        }
+
+        .corridor-card {
+            border-left: 4px solid;
+            transition: transform 0.2s;
+        }
+
+        .corridor-card:hover {
+            transform: translateX(4px);
+        }
+
+        .source-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+        }
+
+        .dest-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+    </style>
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="page">
+        <!-- Sidebar -->
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-brand navbar-brand-autodark text-center">
+                    <a href="index.html" class="d-flex flex-column align-items-center text-decoration-none">
+                        <img src="images/sankhya_logo.png" alt="SANKHYA" class="sidebar-logo">
+                        <span class="sidebar-subtitle">From Numbers to Decisions</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item"><a class="nav-link" href="index.html"><span class="nav-link-title">Command
+                                    Center</span></a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#navbar-extra"
+                                data-bs-toggle="dropdown"><span class="nav-link-title">Analytics Modules</span></a>
+                            <div class="dropdown-menu show">
+                                <a class="dropdown-item" href="demographic-hub.html">Demographic Hub</a>
+                                <a class="dropdown-item active" href="migration-radar.html">Migration Radar</a>
+                                <a class="dropdown-item" href="resource-lab.html">Resource Lab</a>
+                                <a class="dropdown-item" href="system-health.html">System Health</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="reports.html"><span
+                                    class="nav-link-title">Reports</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="alerts.html"><span
+                                    class="nav-link-title">Alerts</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <div class="page-pretitle">Analytics Module</div>
+                            <h2 class="page-title">Migration Radar</h2>
+                        </div>
+                        <div class="col-auto ms-auto">
+                            <select class="form-select" id="time-filter">
+                                <option value="7d">Last 7 Days</option>
+                                <option value="30d" selected>Last 30 Days</option>
+                                <option value="90d">Last Quarter</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <a href="reports.html" class="btn btn-primary">Generate Report</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body">
+                <div class="container-xl">
+                    <!-- KPI Row -->
+                    <div class="row row-deck row-cards mb-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Active Corridors</div>
+                                    <div class="h1 mb-0" id="kpi-corridors">--</div>
+                                    <div class="text-muted small">detected migration paths</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Migration Volume</div>
+                                    <div class="h1 mb-0 text-primary" id="kpi-volume">--</div>
+                                    <div class="text-muted small">address updates detected</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Top Source State</div>
+                                    <div class="h1 mb-0 text-danger" id="kpi-source">--</div>
+                                    <div class="text-muted small">outbound migration hub</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body">
+                                    <div class="subheader">Top Destination</div>
+                                    <div class="h1 mb-0 text-success" id="kpi-destination">--</div>
+                                    <div class="text-muted small">inbound migration hub</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-deck row-cards">
+                        <!-- Migration Map -->
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Migration Flow Visualization</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-blue">Live Data</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="migration-map"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Migration Corridors -->
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Top Migration Corridors</h3>
+                                </div>
+                                <div class="card-body" id="corridors-container">
+                                    <div class="text-center text-muted">Loading real data...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seasonal Trends -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Seasonal Migration Trends</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-seasonal" style="height: 280px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Migration Impact -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Resource Impact Analysis</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-warning mb-3">
+                                        <h4 class="alert-title">⚠️ Capacity Alert: Delhi NCR</h4>
+                                        <p class="mb-0">Predicted 42% surge in demand due to Bihar→Delhi migration
+                                            corridor. Recommend mobile team deployment.</p>
+                                    </div>
+                                    <div class="list-group">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span>Delhi: Resource strain</span>
+                                            <span class="badge bg-danger">+42%</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span>Maharashtra: High demand</span>
+                                            <span class="badge bg-warning">+36%</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span>Karnataka: Elevated load</span>
+                                            <span class="badge bg-warning">+28%</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span>Gujarat: Moderate increase</span>
+                                            <span class="badge bg-info">+19%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+    <script>
+        let SANKHYA_DATA = null;
+        let map = null;
+
+        const formatNumber = (num) => {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toLocaleString();
+        };
+
+        const stateCoords = {
+            'Bihar': [25.0961, 85.3131],
+            'Delhi': [28.7041, 77.1025],
+            'Uttar Pradesh': [26.8467, 80.9462],
+            'Maharashtra': [19.7515, 75.7139],
+            'Rajasthan': [27.0238, 74.2179],
+            'Gujarat': [22.2587, 71.1924],
+            'West Bengal': [22.9868, 87.8550],
+            'Karnataka': [15.3173, 75.7139],
+            'Tamil Nadu': [11.1271, 78.6569],
+            'Kerala': [10.8505, 76.2711],
+            'Madhya Pradesh': [22.9734, 78.6569],
+            'Andhra Pradesh': [15.9129, 79.7400],
+            'Punjab': [31.1471, 75.3412],
+            'Haryana': [29.0588, 76.0856],
+            'Jharkhand': [23.6102, 85.2799],
+            'Odisha': [20.9517, 85.0985],
+            'Chhattisgarh': [21.2787, 81.8661],
+            'Assam': [26.2006, 92.9376],
+            'Telangana': [18.1124, 79.0193]
+        };
+
+        async function loadData() {
+            try {
+                const response = await fetch('data/sankhya_data.json');
+                SANKHYA_DATA = await response.json();
+                console.log('✅ Loaded migration data');
+                return true;
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                return false;
+            }
+        }
+
+        function updateKPIs() {
+            if (!SANKHYA_DATA) return;
+            const corridors = SANKHYA_DATA.migration_corridors || [];
+
+            document.getElementById('kpi-corridors').textContent = corridors.length;
+
+            const totalVolume = corridors.reduce((sum, c) => sum + (c.volume || 0), 0);
+            document.getElementById('kpi-volume').textContent = formatNumber(totalVolume);
+
+            if (corridors.length > 0) {
+                document.getElementById('kpi-source').textContent = corridors[0].source || 'Bihar';
+                document.getElementById('kpi-destination').textContent = corridors[0].destination || 'Delhi';
+            }
+        }
+
+        function updateCorridors() {
+            if (!SANKHYA_DATA) return;
+            const container = document.getElementById('corridors-container');
+            const corridors = SANKHYA_DATA.migration_corridors || [];
+
+            container.innerHTML = corridors.map((c, i) => `
+        <div class="corridor-card card mb-2" style="border-left-color: ${c.change_percent > 0 ? '#10b981' : '#ef4444'}">
+          <div class="card-body p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="badge source-badge text-white me-1">${c.origin}</span>
+                <span class="text-muted">→</span>
+                <span class="badge dest-badge text-white ms-1">${c.destination}</span>
+              </div>
+              <span class="badge bg-${c.change_percent > 0 ? 'success' : 'danger'}">
+                ${c.change_percent > 0 ? '+' : ''}${c.change_percent}%
+              </span>
+            </div>
+            <div class="mt-2 text-muted small">
+              <span class="fw-bold">${formatNumber(c.volume)}</span> movements
+            </div>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        function initMap() {
+            map = L.map('migration-map').setView([22.5, 82], 5);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© CartoDB'
+            }).addTo(map);
+
+            // Add migration flow lines
+            if (SANKHYA_DATA && SANKHYA_DATA.migration_corridors) {
+                SANKHYA_DATA.migration_corridors.forEach(c => {
+                    const srcCoord = stateCoords[c.origin];
+                    const dstCoord = stateCoords[c.destination];
+
+                    if (srcCoord && dstCoord) {
+                        // Draw arrow line
+                        const polyline = L.polyline([srcCoord, dstCoord], {
+                            color: c.change_percent > 0 ? '#10b981' : '#ef4444',
+                            weight: Math.min(Math.abs(c.change_percent) / 5 + 2, 8),
+                            opacity: 0.7,
+                            dashArray: '10, 10'
+                        }).addTo(map);
+
+                        polyline.bindPopup(`
+              <strong>${c.origin} → ${c.destination}</strong><br>
+              Volume: ${formatNumber(c.volume)}<br>
+              Change: <span style="color: ${c.change_percent > 0 ? '#10b981' : '#ef4444'}">${c.change_percent > 0 ? '+' : ''}${c.change_percent}%</span>
+            `);
+
+                        // Add source marker
+                        L.circleMarker(srcCoord, {
+                            radius: 8,
+                            color: '#ef4444',
+                            fillColor: '#ef4444',
+                            fillOpacity: 0.7
+                        }).addTo(map).bindPopup(`<strong>${c.origin}</strong><br>Outbound Migration Hub`);
+
+                        // Add destination marker
+                        L.circleMarker(dstCoord, {
+                            radius: 8,
+                            color: '#10b981',
+                            fillColor: '#10b981',
+                            fillOpacity: 0.7
+                        }).addTo(map).bindPopup(`<strong>${c.destination}</strong><br>Inbound Migration Hub`);
+                    }
+                });
+            }
+
+            // Add legend
+            const legend = L.control({ position: 'bottomleft' });
+            legend.onAdd = function () {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `
+          <div style="background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <strong>Migration Flow</strong><br>
+            <span style="color: #ef4444;">● Source</span>&nbsp;&nbsp;
+            <span style="color: #10b981;">● Destination</span>
+          </div>
+        `;
+                return div;
+            };
+            legend.addTo(map);
+        }
+
+        function initSeasonalChart() {
+            new ApexCharts(document.getElementById('chart-seasonal'), {
+                chart: {
+                    type: 'area',
+                    height: 280,
+                    fontFamily: "'Inter', sans-serif",
+                    toolbar: { show: false }
+                },
+                series: [{
+                    name: 'Migration Volume',
+                    data: [32000, 38000, 45000, 52000, 48000, 42000, 38000, 55000, 68000, 72000, 65000, 58000]
+                }],
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+                colors: ['#6366f1'],
+                fill: {
+                    type: 'gradient',
+                    gradient: { shadeIntensity: 1, opacityFrom: 0.5, opacityTo: 0 }
+                },
+                stroke: { width: 3, curve: 'smooth' },
+                dataLabels: { enabled: false },
+                grid: { borderColor: '#f1f1f1' },
+                annotations: {
+                    xaxis: [
+                        { x: 'Sep', x2: 'Nov', fillColor: '#fef3c7', label: { text: '🎉 Festival Season', borderWidth: 0 } }
+                    ]
+                }
+            }).render();
+        }
+
+        async function init() {
+            console.log('🚀 Migration Radar Initializing...');
+            const loaded = await loadData();
+
+            if (loaded) {
+                updateKPIs();
+                updateCorridors();
+            }
+
+            initMap();
+            initSeasonalChart();
+            console.log('✅ Migration Radar loaded');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

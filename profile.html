@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Profile - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+
+        .profile-cover {
+            height: 200px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+        }
+    </style>
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="page">
+        <!-- Include same sidebar as index.html - simplified for this file -->
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h1 class="navbar-brand navbar-brand-autodark">
+                    <a href="index.html">
+                        <span class="text-white fw-bold fs-3">संख्या</span>
+                        <span class="badge bg-primary ms-2">SANKHYA</span>
+                    </a>
+                </h1>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 4h6v8h-6z" />
+                                        <path d="M4 16h6v4h-6z" />
+                                        <path d="M14 12h6v8h-6z" />
+                                        <path d="M14 4h6v4h-6z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">Command Center</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="demographic-hub.html">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">Demographic Hub</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mt-auto active">
+                            <a class="nav-link" href="profile.html">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings.html">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                        <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <h2 class="page-title">My Profile</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="card">
+                        <!-- Profile Cover -->
+                        <div class="profile-cover card-img-top"></div>
+
+                        <div class="card-body" style="margin-top: -5rem;">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <span class="avatar avatar-xl avatar-rounded"
+                                        style="background-image: url(https://ui-avatars.com/api/?name=Admin+User&background=206bc4&color=fff&size=128)"></span>
+                                </div>
+                                <div class="col">
+                                    <h3 class="mb-0">Admin User</h3>
+                                    <p class="text-secondary mb-0">Administrator • North India Region</p>
+                                </div>
+                                <div class="col-12 col-md-auto mt-3 mt-md-0">
+                                    <a href="settings.html" class="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                            <path d="M13.5 6.5l4 4" />
+                                        </svg>
+                                        Edit Profile
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Tabs -->
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                                <li class="nav-item">
+                                    <a href="#tabs-overview" class="nav-link active" data-bs-toggle="tab">Overview</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-activity" class="nav-link" data-bs-toggle="tab">Activity</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-teams" class="nav-link" data-bs-toggle="tab">Teams</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-projects" class="nav-link" data-bs-toggle="tab">Projects</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <!-- Overview Tab -->
+                                <div class="tab-pane active show" id="tabs-overview">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="card mb-3">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Personal Information</h3>
+                                                </div>
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col-6 text-secondary">Full Name</div>
+                                                            <div class="col-6">Admin User</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col-6 text-secondary">Email</div>
+                                                            <div class="col-6">admin@sankhya.gov.in</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col-6 text-secondary">Phone</div>
+                                                            <div class="col-6">+91 98765 43210</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col-6 text-secondary">Role</div>
+                                                            <div class="col-6"><span
+                                                                    class="badge bg-primary">Administrator</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col-6 text-secondary">Region</div>
+                                                            <div class="col-6">North India</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col-6 text-secondary">Member Since</div>
+                                                            <div class="col-6">January 2024</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="card mb-3">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Statistics</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row g-3">
+                                                        <div class="col-6">
+                                                            <div class="card card-sm">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="avatar bg-blue-lt me-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                class="icon" width="24" height="24"
+                                                                                viewBox="0 0 24 24" stroke-width="2"
+                                                                                stroke="currentColor" fill="none">
+                                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none" />
+                                                                                <path d="M5 12l5 5l10 -10" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <div>
+                                                                            <div class="fw-bold">247</div>
+                                                                            <div class="text-secondary small">Alerts
+                                                                                Resolved</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="card card-sm">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="avatar bg-green-lt me-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                class="icon" width="24" height="24"
+                                                                                viewBox="0 0 24 24" stroke-width="2"
+                                                                                stroke="currentColor" fill="none">
+                                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none" />
+                                                                                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                                                                <path
+                                                                                    d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <div>
+                                                                            <div class="fw-bold">89</div>
+                                                                            <div class="text-secondary small">Reports
+                                                                                Generated</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="card card-sm">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="avatar bg-yellow-lt me-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                class="icon" width="24" height="24"
+                                                                                viewBox="0 0 24 24" stroke-width="2"
+                                                                                stroke="currentColor" fill="none">
+                                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none" />
+                                                                                <path
+                                                                                    d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                                                <path
+                                                                                    d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                                                <path d="M5 17h-2v-4m2 0v-6h8m4 0v9" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <div>
+                                                                            <div class="fw-bold">34</div>
+                                                                            <div class="text-secondary small">Teams
+                                                                                Dispatched</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="card card-sm">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="avatar bg-red-lt me-3">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                class="icon" width="24" height="24"
+                                                                                viewBox="0 0 24 24" stroke-width="2"
+                                                                                stroke="currentColor" fill="none">
+                                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                                    fill="none" />
+                                                                                <path
+                                                                                    d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                                                                <path d="M12 7v5l3 3" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <div>
+                                                                            <div class="fw-bold">1,204</div>
+                                                                            <div class="text-secondary small">Hours
+                                                                                Logged</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Skills / Badges -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Badges & Certifications</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <span class="badge badge-outline text-primary">Certified
+                                                            Admin</span>
+                                                        <span class="badge badge-outline text-success">Security
+                                                            Trained</span>
+                                                        <span class="badge badge-outline text-warning">Analytics
+                                                            Pro</span>
+                                                        <span class="badge badge-outline text-info">Crisis
+                                                            Management</span>
+                                                        <span class="badge badge-outline text-secondary">Data
+                                                            Privacy</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Activity Tab -->
+                                <div class="tab-pane" id="tabs-activity">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Recent Activity</h3>
+                                        </div>
+                                        <div class="list-group list-group-flush list-group-hoverable">
+                                            <div class="list-group-item">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <span class="badge bg-success"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <span class="avatar avatar-sm bg-success-lt">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                stroke-width="2" stroke="currentColor" fill="none">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M5 12l5 5l10 -10" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="text-truncate">Resolved Alert #4521 - Varanasi DSI
+                                                            Critical</div>
+                                                        <div class="text-secondary small">2 hours ago</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <span class="badge bg-primary"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <span class="avatar avatar-sm bg-primary-lt">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                stroke-width="2" stroke="currentColor" fill="none">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                                <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                                <path d="M5 17h-2v-4m2 0v-6h8m4 0v9" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="text-truncate">Dispatched team to Bihar
+                                                            flood-affected centers</div>
+                                                        <div class="text-secondary small">5 hours ago</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <span class="badge bg-info"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <span class="avatar avatar-sm bg-info-lt">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                stroke-width="2" stroke="currentColor" fill="none">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                                                <path
+                                                                    d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="text-truncate">Generated Weekly DSI Report for North
+                                                            Region</div>
+                                                        <div class="text-secondary small">Yesterday at 4:30 PM</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <span class="badge bg-warning"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <span class="avatar avatar-sm bg-warning-lt">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                stroke-width="2" stroke="currentColor" fill="none">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M3 21h18" />
+                                                                <path d="M9 8h1" />
+                                                                <path d="M9 12h1" />
+                                                                <path d="M9 16h1" />
+                                                                <path d="M14 8h1" />
+                                                                <path d="M14 12h1" />
+                                                                <path d="M14 16h1" />
+                                                                <path
+                                                                    d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="text-truncate">Reallocated 5 kits from dormant
+                                                            center to Patna</div>
+                                                        <div class="text-secondary small">2 days ago</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Teams Tab -->
+                                <div class="tab-pane" id="tabs-teams">
+                                    <div class="row row-cards">
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <div class="mb-3">
+                                                        <span class="avatar avatar-lg bg-blue-lt">NR</span>
+                                                    </div>
+                                                    <h3 class="m-0 mb-1">North Region Ops</h3>
+                                                    <div class="text-secondary">12 members</div>
+                                                    <div class="mt-3">
+                                                        <span class="badge bg-blue-lt">Active</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <div class="mb-3">
+                                                        <span class="avatar avatar-lg bg-green-lt">CR</span>
+                                                    </div>
+                                                    <h3 class="m-0 mb-1">Crisis Response Unit</h3>
+                                                    <div class="text-secondary">8 members</div>
+                                                    <div class="mt-3">
+                                                        <span class="badge bg-green-lt">On Standby</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <div class="mb-3">
+                                                        <span class="avatar avatar-lg bg-yellow-lt">DA</span>
+                                                    </div>
+                                                    <h3 class="m-0 mb-1">Data Analytics Team</h3>
+                                                    <div class="text-secondary">5 members</div>
+                                                    <div class="mt-3">
+                                                        <span class="badge bg-yellow-lt">Working</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Projects Tab -->
+                                <div class="tab-pane" id="tabs-projects">
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                            <table class="table table-vcenter card-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Project</th>
+                                                        <th>Status</th>
+                                                        <th>Progress</th>
+                                                        <th>Due Date</th>
+                                                        <th class="w-1"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>DSI Threshold Optimization</td>
+                                                        <td><span class="badge bg-success">Active</span></td>
+                                                        <td>
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-primary" style="width: 75%">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-secondary">Feb 15, 2026</td>
+                                                        <td>
+                                                            <a href="#">Details</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Migration Pattern Analysis</td>
+                                                        <td><span class="badge bg-warning">Review</span></td>
+                                                        <td>
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-warning" style="width: 90%">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-secondary">Jan 30, 2026</td>
+                                                        <td>
+                                                            <a href="#">Details</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Resource Allocation AI Model</td>
+                                                        <td><span class="badge bg-info">Planning</span></td>
+                                                        <td>
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-info" style="width: 25%">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-secondary">Mar 01, 2026</td>
+                                                        <td>
+                                                            <a href="#">Details</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-transparent d-print-none">
+                <div class="container-xl">
+                    <div class="row text-center align-items-center">
+                        <div class="col-12">
+                            Copyright &copy; 2026 <a href="." class="link-secondary">SANKHYA/UIDAI</a>. All rights
+                            reserved.
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+
+</html>

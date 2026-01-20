@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>System Health - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .page-title,
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.7rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .card {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: none;
+            border-radius: 12px;
+        }
+
+        .kpi-card {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-vertical {
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-online {
+            background: #10b981;
+        }
+
+        .status-warning {
+            background: #f59e0b;
+        }
+
+        .status-offline {
+            background: #ef4444;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        .anomaly-row {
+            border-left: 4px solid;
+        }
+
+        .anomaly-critical {
+            border-left-color: #ef4444;
+        }
+
+        .anomaly-warning {
+            border-left-color: #f59e0b;
+        }
+
+        .system-metric {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="page">
+        <!-- Sidebar -->
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-brand navbar-brand-autodark text-center">
+                    <a href="index.html" class="d-flex flex-column align-items-center text-decoration-none">
+                        <img src="images/sankhya_logo.png" alt="SANKHYA" class="sidebar-logo">
+                        <span class="sidebar-subtitle">From Numbers to Decisions</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item"><a class="nav-link" href="index.html"><span class="nav-link-title">Command
+                                    Center</span></a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#navbar-extra"
+                                data-bs-toggle="dropdown"><span class="nav-link-title">Analytics Modules</span></a>
+                            <div class="dropdown-menu show">
+                                <a class="dropdown-item" href="demographic-hub.html">Demographic Hub</a>
+                                <a class="dropdown-item" href="migration-radar.html">Migration Radar</a>
+                                <a class="dropdown-item" href="resource-lab.html">Resource Lab</a>
+                                <a class="dropdown-item active" href="system-health.html">System Health</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="reports.html"><span
+                                    class="nav-link-title">Reports</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="alerts.html"><span
+                                    class="nav-link-title">Alerts</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <div class="page-pretitle">Analytics Module</div>
+                            <h2 class="page-title">System Health Monitor</h2>
+                        </div>
+                        <div class="col-auto d-flex align-items-center">
+                            <span class="status-indicator status-online me-2"></span>
+                            <span class="fw-bold text-success">All Systems Operational</span>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" onclick="refreshHealth()">Refresh Status</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body">
+                <div class="container-xl">
+                    <!-- System Status Row -->
+                    <div class="row row-deck row-cards mb-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body text-center">
+                                    <div class="subheader">System Uptime</div>
+                                    <div class="system-metric text-success" id="kpi-uptime">99.97%</div>
+                                    <div class="text-muted small">Last 30 days</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body text-center">
+                                    <div class="subheader">Avg Response Time</div>
+                                    <div class="system-metric text-primary" id="kpi-response">128ms</div>
+                                    <div class="text-muted small">API latency</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body text-center">
+                                    <div class="subheader">Active Anomalies</div>
+                                    <div class="system-metric text-warning" id="kpi-anomalies">--</div>
+                                    <div class="text-muted small">requiring attention</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card kpi-card">
+                                <div class="card-body text-center">
+                                    <div class="subheader">Connected Centers</div>
+                                    <div class="system-metric" id="kpi-connected">98.5%</div>
+                                    <div class="text-muted small">network health</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-deck row-cards">
+                        <!-- Throughput Chart -->
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Transaction Throughput (24 Hours)</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-success">Live</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="chart-throughput" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- API Health -->
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">API Endpoint Health</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group list-group-flush">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><span
+                                                    class="status-indicator status-online me-2"></span>/api/auth</span>
+                                            <span class="text-muted">45ms</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><span
+                                                    class="status-indicator status-online me-2"></span>/api/enroll</span>
+                                            <span class="text-muted">128ms</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><span
+                                                    class="status-indicator status-online me-2"></span>/api/update</span>
+                                            <span class="text-muted">156ms</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><span
+                                                    class="status-indicator status-warning me-2"></span>/api/biometric</span>
+                                            <span class="text-warning">342ms</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><span
+                                                    class="status-indicator status-online me-2"></span>/api/reports</span>
+                                            <span class="text-muted">89ms</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><span
+                                                    class="status-indicator status-online me-2"></span>/api/analytics</span>
+                                            <span class="text-muted">112ms</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Anomaly Detection -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Detected Anomalies</h3>
+                                    <div class="card-actions">
+                                        <span class="badge bg-azure">Real CSV Analysis</span>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table card-table table-vcenter">
+                                        <thead>
+                                            <tr>
+                                                <th>District</th>
+                                                <th>Type</th>
+                                                <th>Deviation</th>
+                                                <th>Severity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="anomalies-table">
+                                            <tr>
+                                                <td colspan="4" class="text-center text-muted">Loading real data...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Logs -->
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Recent System Events</h3>
+                                </div>
+                                <div class="card-body" style="max-height: 350px; overflow-y: auto;">
+                                    <div class="list-group list-group-flush">
+                                        <div class="list-group-item">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <span class="badge bg-success me-2">INFO</span>
+                                                <small class="text-muted">2 min ago</small>
+                                            </div>
+                                            <p class="mb-0 small">Data processing completed. 4.9M records analyzed.</p>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <span class="badge bg-warning me-2">WARN</span>
+                                                <small class="text-muted">15 min ago</small>
+                                            </div>
+                                            <p class="mb-0 small">High latency detected on /api/biometric endpoint.</p>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <span class="badge bg-info me-2">INFO</span>
+                                                <small class="text-muted">1 hour ago</small>
+                                            </div>
+                                            <p class="mb-0 small">DSI recalculated for all 779 stressed districts.</p>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <span class="badge bg-success me-2">INFO</span>
+                                                <small class="text-muted">2 hours ago</small>
+                                            </div>
+                                            <p class="mb-0 small">Anomaly detection scan completed. 10 warnings found.
+                                            </p>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <span class="badge bg-danger me-2">ALERT</span>
+                                                <small class="text-muted">3 hours ago</small>
+                                            </div>
+                                            <p class="mb-0 small">504 critical districts identified. Mobile teams
+                                                notified.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        let SANKHYA_DATA = null;
+
+        async function loadData() {
+            try {
+                const response = await fetch('data/sankhya_data.json');
+                SANKHYA_DATA = await response.json();
+                console.log('✅ Loaded system health data');
+                return true;
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                return false;
+            }
+        }
+
+        function updateKPIs() {
+            if (!SANKHYA_DATA) return;
+            const anomalies = SANKHYA_DATA.anomalies || [];
+            document.getElementById('kpi-anomalies').textContent = anomalies.length;
+        }
+
+        function updateAnomaliesTable() {
+            if (!SANKHYA_DATA || !SANKHYA_DATA.anomalies) return;
+            const tbody = document.getElementById('anomalies-table');
+            const anomalies = SANKHYA_DATA.anomalies.slice(0, 8);
+
+            tbody.innerHTML = anomalies.map(a => `
+        <tr class="anomaly-row anomaly-${a.severity}">
+          <td>
+            <div class="fw-bold">${a.district}</div>
+            <div class="text-muted small">${a.state}</div>
+          </td>
+          <td>
+            <span class="badge bg-${a.type === 'surge' ? 'warning' : 'info'}">
+              ${a.type === 'surge' ? '📈 Surge' : '📉 Drop'}
+            </span>
+          </td>
+          <td>
+            <span class="${a.deviation > 0 ? 'text-danger' : 'text-info'} fw-bold">
+              ${a.deviation > 0 ? '+' : ''}${a.deviation}%
+            </span>
+          </td>
+          <td>
+            <span class="badge bg-${a.severity === 'critical' ? 'danger' : 'warning'}">
+              ${a.severity.toUpperCase()}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+        }
+
+        function initThroughputChart() {
+            const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
+            const data = hours.map(() => Math.floor(Math.random() * 50000) + 80000);
+
+            new ApexCharts(document.getElementById('chart-throughput'), {
+                chart: {
+                    type: 'area',
+                    height: 300,
+                    fontFamily: "'Inter', sans-serif",
+                    toolbar: { show: false }
+                },
+                series: [{
+                    name: 'Transactions',
+                    data: data
+                }],
+                xaxis: { categories: hours },
+                colors: ['#10b981'],
+                fill: {
+                    type: 'gradient',
+                    gradient: { shadeIntensity: 1, opacityFrom: 0.5, opacityTo: 0.1 }
+                },
+                stroke: { width: 2, curve: 'smooth' },
+                dataLabels: { enabled: false },
+                grid: { borderColor: '#f1f1f1' },
+                tooltip: {
+                    y: { formatter: val => val.toLocaleString() + ' txns' }
+                }
+            }).render();
+        }
+
+        function refreshHealth() {
+            alert('🔄 Refreshing system health metrics...\n\nAll endpoints checked. System operational.');
+        }
+
+        async function init() {
+            console.log('🚀 System Health Initializing...');
+            const loaded = await loadData();
+
+            if (loaded) {
+                updateKPIs();
+                updateAnomaliesTable();
+            }
+
+            initThroughputChart();
+            console.log('✅ System Health loaded');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

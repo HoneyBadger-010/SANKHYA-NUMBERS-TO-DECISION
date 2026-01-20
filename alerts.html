@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Alerts - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+    <div class="page">
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <h1 class="navbar-brand"><a href="index.html"><span class="text-white fw-bold fs-3">संख्या</span><span
+                            class="badge bg-primary ms-2">SANKHYA</span></a></h1>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Command Center</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="alerts.html">Alerts <span
+                                    class="badge bg-danger ms-auto">12</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="reports.html">Reports</a></li>
+                        <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <h2 class="page-title">Alert Management</h2>
+                        </div>
+                        <div class="col-auto">
+                            <div class="btn-list">
+                                <select class="form-select">
+                                    <option>All Severities</option>
+                                    <option>Critical</option>
+                                    <option>High</option>
+                                    <option>Medium</option>
+                                </select>
+                                <a href="#" class="btn btn-success">Mark All Read</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-cards mb-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm card-gradient-danger">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="text-white-50 small">Critical</div>
+                                            <div class="h1 mb-0">3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="text-secondary small">High</div>
+                                            <div class="h1 mb-0 text-warning">9</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="text-secondary small">Medium</div>
+                                            <div class="h1 mb-0">24</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="text-secondary small">Resolved Today</div>
+                                            <div class="h1 mb-0 text-success">47</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Active Alerts</h3>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto"><span
+                                            class="status-dot status-dot-animated bg-danger d-block"></span></div>
+                                    <div class="col-auto"><span class="badge bg-danger">CRITICAL</span></div>
+                                    <div class="col">
+                                        <a href="#" class="text-body d-block fw-bold">DSI Threshold Exceeded:
+                                            Varanasi</a>
+                                        <div class="text-secondary small">DSI score hit 8.7, immediate resource dispatch
+                                            recommended</div>
+                                    </div>
+                                    <div class="col-auto text-secondary">5 min ago</div>
+                                    <div class="col-auto">
+                                        <a href="#" class="btn btn-sm btn-warning">Dispatch</a>
+                                        <a href="#" class="btn btn-sm btn-success">Resolve</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto"><span
+                                            class="status-dot status-dot-animated bg-danger d-block"></span></div>
+                                    <div class="col-auto"><span class="badge bg-danger">CRITICAL</span></div>
+                                    <div class="col">
+                                        <a href="#" class="text-body d-block fw-bold">Center EC-BR-001234 Offline</a>
+                                        <div class="text-secondary small">No heartbeat for 2 hours, high-traffic center
+                                        </div>
+                                    </div>
+                                    <div class="col-auto text-secondary">2 hours ago</div>
+                                    <div class="col-auto">
+                                        <a href="#" class="btn btn-sm btn-primary">Investigate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto"><span
+                                            class="status-dot status-dot-animated bg-warning d-block"></span></div>
+                                    <div class="col-auto"><span class="badge bg-warning">HIGH</span></div>
+                                    <div class="col">
+                                        <a href="#" class="text-body d-block fw-bold">Migration Surge: Bihar → Delhi
+                                            Corridor</a>
+                                        <div class="text-secondary small">42% increase in flow detected, capacity
+                                            planning needed</div>
+                                    </div>
+                                    <div class="col-auto text-secondary">1 hour ago</div>
+                                    <div class="col-auto">
+                                        <a href="migration-radar.html" class="btn btn-sm">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto"><span class="status-dot bg-yellow d-block"></span></div>
+                                    <div class="col-auto"><span class="badge bg-warning">HIGH</span></div>
+                                    <div class="col">
+                                        <a href="#" class="text-body d-block fw-bold">Resource Utilization Alert: Patna
+                                            Centers</a>
+                                        <div class="text-secondary small">3 centers at 95%+ capacity</div>
+                                    </div>
+                                    <div class="col-auto text-secondary">3 hours ago</div>
+                                    <div class="col-auto">
+                                        <a href="resource-lab.html" class="btn btn-sm">Reallocate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto"><span class="status-dot bg-info d-block"></span></div>
+                                    <div class="col-auto"><span class="badge bg-info">MEDIUM</span></div>
+                                    <div class="col">
+                                        <a href="#" class="text-body d-block fw-bold">Scheduled Maintenance: Database
+                                            Cluster</a>
+                                        <div class="text-secondary small">Planned for Jan 25, 02:00 AM</div>
+                                    </div>
+                                    <div class="col-auto text-secondary">Yesterday</div>
+                                    <div class="col-auto">
+                                        <a href="#" class="btn btn-sm">Acknowledge</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <ul class="pagination m-0 ms-auto">
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer footer-transparent d-print-none">
+                <div class="container-xl text-center">© 2026 SANKHYA/UIDAI</div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+
+</html>

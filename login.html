@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign In - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .auth-illustration {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .auth-logo {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+        }
+
+        .auth-subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .login-card {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: none;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(32, 107, 196, 0.15);
+        }
+
+        .btn-primary {
+            box-shadow: 0 4px 12px rgba(32, 107, 196, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(32, 107, 196, 0.4);
+        }
+
+        .login-form-side {
+            background-color: #f8f9fa;
+        }
+
+        .mobile-logo {
+            max-width: 120px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="row g-0 flex-fill">
+        <!-- Illustration Side -->
+        <div class="col-12 col-lg-6 col-xl-4 auth-illustration d-none d-lg-flex">
+            <img src="images/sankhya_logo.png" alt="SANKHYA Logo" class="auth-logo">
+            <p class="auth-subtitle">From Numbers to Decisions</p>
+            <h2 class="text-white mb-3 text-center">Predictive Governance Dashboard</h2>
+            <p class="text-white-50 text-center mb-4">
+                Advanced analytics platform for UIDAI operations monitoring,
+                resource optimization, and predictive intelligence.
+            </p>
+            <div class="row g-3 w-100 mt-4">
+                <div class="col-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center py-3">
+                            <div class="h2 mb-0 text-white">1.38B</div>
+                            <div class="text-white-50 small">Enrolments</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center py-3">
+                            <div class="h2 mb-0 text-white">107Cr</div>
+                            <div class="text-white-50 small">Daily Auth</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center py-3">
+                            <div class="h2 mb-0 text-white">99.9%</div>
+                            <div class="text-white-50 small">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-auto text-white-50 small">
+                © 2026 SANKHYA/UIDAI. All rights reserved.
+            </div>
+        </div>
+
+        <!-- Login Form Side -->
+        <div class="col-12 col-lg-6 col-xl-8 d-flex flex-column justify-content-center login-form-side">
+            <div class="container container-tight py-4">
+                <div class="text-center mb-4 d-lg-none">
+                    <img src="images/sankhya_logo.png" alt="SANKHYA" class="mobile-logo mb-2">
+                    <p class="text-secondary small fst-italic">From Numbers to Decisions</p>
+                </div>
+
+                <div class="card card-md login-card">
+                    <div class="card-body">
+                        <h2 class="h2 text-center mb-4">Sign in to your account</h2>
+                        <form action="index.html" method="get" autocomplete="off" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label">Email address</label>
+                                <input type="email" class="form-control" placeholder="your@email.com"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">
+                                    Password
+                                    <span class="form-label-description">
+                                        <a href="forgot-password.html">Forgot password?</a>
+                                    </span>
+                                </label>
+                                <div class="input-group input-group-flat">
+                                    <input type="password" class="form-control" placeholder="Your password"
+                                        autocomplete="off">
+                                    <span class="input-group-text">
+                                        <a href="#" class="link-secondary" title="Show password"
+                                            data-bs-toggle="tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                <path
+                                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-check">
+                                    <input type="checkbox" class="form-check-input" />
+                                    <span class="form-check-label">Remember me on this device</span>
+                                </label>
+                            </div>
+                            <div class="form-footer">
+                                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="hr-text">or</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn w-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary" width="24"
+                                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M20.945 11a9 9 0 1 1 -3.284 -5.997l-2.655 2.392a5.5 5.5 0 1 0 2.119 6.605h-4.125v-3h7.945z" />
+                                    </svg>
+                                    Login with Google
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#" class="btn w-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary" width="24"
+                                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                                    </svg>
+                                    Login with GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center text-secondary mt-3">
+                    Don't have an account yet? <a href="register.html" tabindex="-1">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+
+</html>

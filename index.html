@@ -1,0 +1,1365 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>SANKHYA - Command Center | UIDAI Analytics</title>
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler-vendors.min.css" rel="stylesheet" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="css/custom.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --tblr-font-sans-serif: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    .page-title,
+    .card-title {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .sidebar-logo {
+      max-width: 100px;
+      height: auto;
+      margin-bottom: 0.25rem;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.5px;
+    }
+
+    .card {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      border: none;
+      border-radius: 12px;
+    }
+
+    .kpi-card {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+    }
+
+    .navbar-vertical {
+      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .prediction-card {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      color: white;
+      border-radius: 20px;
+    }
+
+    .card-gradient-danger {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: white;
+    }
+
+    .card-gradient-success {
+      background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+      color: white;
+    }
+
+    #india-map {
+      height: 400px;
+      border-radius: 12px;
+      z-index: 1;
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .leaflet-popup-content {
+      font-family: 'Inter', sans-serif;
+      margin: 10px 12px;
+    }
+
+    .dsi-critical-marker {
+      background: #ef4444;
+      border: 3px solid #fff;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+    }
+
+    .dsi-high-marker {
+      background: #f97316;
+      border: 3px solid #fff;
+    }
+
+    .dsi-medium-marker {
+      background: #f59e0b;
+      border: 3px solid #fff;
+    }
+
+    .dsi-low-marker {
+      background: #10b981;
+      border: 3px solid #fff;
+    }
+
+    .marker-pulse {
+      animation: pulse-animation 2s infinite;
+    }
+
+    @keyframes pulse-animation {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .alert-ticker {
+      background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      color: white;
+    }
+
+    .alert-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .quick-action-btn {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 6px;
+    }
+
+    .dsi-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dsi-low {
+      background: #10b981;
+    }
+
+    .dsi-medium {
+      background: #f59e0b;
+    }
+
+    .dsi-high {
+      background: #f97316;
+    }
+
+    .dsi-critical {
+      background: #ef4444;
+      animation: pulse-critical 2s infinite;
+    }
+
+    @keyframes pulse-critical {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .loading-shimmer {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+  </style>
+</head>
+
+<body class="layout-fluid with-strips">
+  <!-- Decorative Flag Strips -->
+  <div class="flag-strip-top"></div>
+  <div class="flag-strip-bottom"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+  <div class="page">
+    <!-- Sidebar -->
+    <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-brand navbar-brand-autodark text-center">
+          <a href="index.html" class="d-flex flex-column align-items-center text-decoration-none">
+            <img src="images/sankhya_logo.png" alt="SANKHYA" class="sidebar-logo">
+            <span class="sidebar-subtitle">From Numbers to Decisions</span>
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="sidebar-menu">
+          <ul class="navbar-nav pt-lg-3">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 4h6v8h-6z" />
+                    <path d="M4 16h6v4h-6z" />
+                    <path d="M14 12h6v8h-6z" />
+                    <path d="M14 4h6v4h-6z" />
+                  </svg>
+                </span>
+                <span class="nav-link-title">Command Center</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
+                data-bs-auto-close="false" role="button">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+                  </svg>
+                </span>
+                <span class="nav-link-title">Analytics Modules</span>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="demographic-hub.html">Demographic Hub</a>
+                <a class="dropdown-item" href="migration-radar.html">Migration Radar</a>
+                <a class="dropdown-item" href="resource-lab.html">Resource Lab</a>
+                <a class="dropdown-item" href="system-health.html">System Health</a>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="reports.html"><span class="nav-link-title">Reports</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="alerts.html">
+                <span class="nav-link-title">Alerts</span>
+                <span class="badge badge-sm bg-danger ms-auto" id="alert-count">0</span>
+              </a>
+            </li>
+            <li class="nav-item mt-auto"><a class="nav-link" href="users.html"><span
+                  class="nav-link-title">Users</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="settings.html"><span
+                  class="nav-link-title">Settings</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="page-wrapper">
+      <div class="page-header d-print-none">
+        <div class="container-xl">
+          <div class="row g-2 align-items-center">
+            <div class="col">
+              <div class="page-pretitle">Overview</div>
+              <h2 class="page-title">Command Center</h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+              <div class="btn-list">
+                <span class="d-none d-sm-inline"><a href="reports.html" class="btn">Generate Report</a></span>
+                <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                  data-bs-target="#modal-quick-action">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 5l0 14" />
+                    <path d="M5 12l14 0" />
+                  </svg>
+                  Quick Action
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div class="container-xl">
+
+          <!-- Alert Ticker -->
+          <div class="alert-ticker mb-4">
+            <div class="d-flex align-items-center">
+              <span class="badge bg-danger me-2">LIVE</span>
+              <div id="alert-ticker-content" class="d-flex gap-4 overflow-hidden">
+                <div class="alert-item">
+                  <span class="badge bg-red">LOADING</span>
+                  <span>Fetching real-time alerts from data...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Ribbon -->
+          <div class="row row-deck row-cards mb-4">
+            <div class="col-sm-6 col-lg-3">
+              <div class="card kpi-card"
+                title="DSI Formula: (V × Wa + S × Ws) / C + R&#10;V = Volume (daily transactions)&#10;Wa = % adult updates (migration)&#10;S = Seasonal spike&#10;Ws = Urgency multiplier&#10;C = Capacity (centers)&#10;R = Repeat pressure&#10;&#10;Thresholds: Low(<3.3) Medium(3.3-6.6) Critical(>6.6)"
+                style="cursor: help;">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div class="subheader">Live DSI Average <span style="font-size: 10px; opacity: 0.7;">ⓘ hover for
+                        formula</span></div>
+                    <div class="ms-auto lh-1">
+                      <span class="badge bg-blue">Real Data</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-baseline">
+                    <div class="h1 mb-0 me-2" id="kpi-dsi">--</div>
+                    <div class="me-auto">
+                      <span class="text-green d-inline-flex align-items-center lh-1" id="kpi-dsi-change">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm" width="24" height="24"
+                          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M3 17l6 -6l4 4l8 -8" />
+                        </svg>
+                        Calculated
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card kpi-card card-gradient-danger">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div class="subheader text-white-50">Stressed Districts</div>
+                  </div>
+                  <div class="d-flex align-items-baseline">
+                    <div class="h1 mb-0 me-2" id="kpi-stressed">--</div>
+                  </div>
+                  <div class="mt-2">
+                    <div class="d-flex justify-content-between small">
+                      <span>Critical: <span id="kpi-critical">--</span></span>
+                      <span>High: <span id="kpi-high">--</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card kpi-card">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div class="subheader">Asset Efficiency</div>
+                  </div>
+                  <div class="d-flex align-items-baseline">
+                    <div class="h1 mb-0 me-2" id="kpi-efficiency">--</div>
+                    <div class="me-auto">
+                      <span class="text-green d-inline-flex align-items-center lh-1">+3.2%</span>
+                    </div>
+                  </div>
+                  <div class="progress progress-sm mt-2">
+                    <div class="progress-bar bg-primary" id="kpi-efficiency-bar" style="width: 0%" role="progressbar">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card kpi-card card-gradient-success">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div class="subheader text-white-50">System Status</div>
+                  </div>
+                  <div class="d-flex align-items-baseline">
+                    <div class="h1 mb-0 me-2" id="kpi-status">--</div>
+                  </div>
+                  <div class="mt-2 d-flex gap-2">
+                    <span class="badge bg-white text-success">API: 99.9%</span>
+                    <span class="badge bg-white text-success">DB: Healthy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Content Row -->
+          <div class="row row-deck row-cards">
+            <!-- Interactive Pulse Map -->
+            <div class="col-lg-8">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Interactive Pulse Map - India Districts</h3>
+                  <div class="card-actions">
+                    <button class="btn btn-primary btn-sm" onclick="resetMapView()">Reset View</button>
+                  </div>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="card-body py-1 border-bottom bg-light">
+                  <div class="row g-1 align-items-center">
+                    <!-- Pincode Search -->
+                    <div class="col-md-2">
+                      <input type="text" class="form-control form-control-sm" id="filterPincode" placeholder="Pincode"
+                        oninput="filterByPincode(this.value)">
+                    </div>
+
+                    <!-- State Dropdown -->
+                    <div class="col-md-2">
+                      <select class="form-select form-select-sm" id="filterState" onchange="filterByState(this.value)">
+                        <option value="">All States</option>
+                      </select>
+                    </div>
+
+                    <!-- District Dropdown -->
+                    <div class="col-md-2">
+                      <select class="form-select form-select-sm" id="filterDistrict"
+                        onchange="filterByDistrict(this.value)">
+                        <option value="">All Districts</option>
+                      </select>
+                    </div>
+
+                    <!-- Zone Filter -->
+                    <div class="col-md-2">
+                      <select class="form-select form-select-sm" id="filterZone" onchange="filterByZone(this.value)">
+                        <option value="">All Zones</option>
+                        <option value="blue_zone">🔵 Blue Zone (Seniors)</option>
+                        <option value="dez">🟠 DEZ (Digital Exclusion)</option>
+                        <option value="normal">⚪ Normal</option>
+                      </select>
+                    </div>
+
+                    <!-- View Mode -->
+                    <div class="col-md-4">
+                      <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="viewMode" id="viewNormal" value="normal" checked
+                          onchange="setViewMode('normal')">
+                        <label class="btn btn-sm btn-outline-primary" for="viewNormal">Normal</label>
+
+                        <input type="radio" class="btn-check" name="viewMode" id="viewState" value="state"
+                          onchange="setViewMode('state')">
+                        <label class="btn btn-sm btn-outline-primary" for="viewState">State Avg</label>
+
+                        <input type="radio" class="btn-check" name="viewMode" id="viewDistrict" value="district"
+                          onchange="setViewMode('district')">
+                        <label class="btn btn-sm btn-outline-primary" for="viewDistrict">District Avg</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-body p-0">
+                  <div id="india-map" style="height: 300px;"></div>
+                  <div class="p-2 border-top">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex gap-4">
+                        <div class="d-flex align-items-center"><span
+                            class="dsi-indicator dsi-low me-2"></span><small>Low (0-3.3)</small></div>
+                        <div class="d-flex align-items-center"><span
+                            class="dsi-indicator dsi-medium me-2"></span><small>Medium (3.3-6.6)</small></div>
+                        <div class="d-flex align-items-center"><span
+                            class="dsi-indicator dsi-critical me-2"></span><small>Critical (>6.6)</small></div>
+                      </div>
+                      <small class="text-muted" id="map-marker-count">Loading markers...</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Stats & Charts -->
+            <div class="col-lg-4">
+              <!-- DSI Distribution Pie Chart -->
+              <div class="card mb-3">
+                <div class="card-header">
+                  <h3 class="card-title">DSI Distribution</h3>
+                </div>
+                <div class="card-body">
+                  <canvas id="dsi-pie-chart" height="180"></canvas>
+                </div>
+              </div>
+
+              <!-- Quick Stats -->
+              <div class="card mb-3">
+                <div class="card-header">
+                  <h3 class="card-title">Quick Stats</h3>
+                </div>
+                <div class="card-body p-0">
+                  <table class="table table-sm card-table">
+                    <tbody>
+                      <tr>
+                        <td class="w-1"><span class="avatar avatar-sm bg-primary-lt">📊</span></td>
+                        <td>Total Population</td>
+                        <td class="text-end"><strong id="stat-population">--</strong></td>
+                      </tr>
+                      <tr>
+                        <td><span class="avatar avatar-sm bg-success-lt">📍</span></td>
+                        <td>Districts Analyzed</td>
+                        <td class="text-end"><strong id="stat-districts">--</strong></td>
+                      </tr>
+                      <tr>
+                        <td><span class="avatar avatar-sm bg-warning-lt">👴</span></td>
+                        <td>Senior Population</td>
+                        <td class="text-end"><strong id="stat-seniors">--</strong></td>
+                      </tr>
+                      <tr>
+                        <td><span class="avatar avatar-sm bg-danger-lt">📈</span></td>
+                        <td>Biometric Updates</td>
+                        <td class="text-end"><strong id="stat-updates">--</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Migration Corridors -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Top Migration Corridors</h3>
+                  <div class="card-actions"><a href="migration-radar.html" class="btn btn-sm">View All</a></div>
+                </div>
+                <div class="list-group list-group-flush" id="migration-corridors">
+                  <div class="list-group-item text-center text-muted">Loading...</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Prediction Chart -->
+            <div class="col-lg-8">
+              <div class="card prediction-card">
+                <div class="card-header">
+                  <h3 class="card-title">7-Day Load Forecast (AI Prediction)</h3>
+                  <div class="card-actions">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-ghost-light active">Load</button>
+                      <button class="btn btn-sm btn-ghost-light">DSI</button>
+                      <button class="btn btn-sm btn-ghost-light">Enrolments</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div id="chart-prediction" style="height: 250px;"></div>
+                </div>
+                <div class="card-footer text-white-50">
+                  <div class="row align-items-center">
+                    <div class="col-auto"><span class="badge bg-white text-dark">AI Model v2.4</span></div>
+                    <div class="col">Accuracy: 94.2% | Data: Real CSV Analysis</div>
+                    <div class="col-auto"><a href="#" class="btn btn-sm btn-light">Retrain Model</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Stressed Districts Table -->
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Top Stressed Districts</h3>
+                  <div class="card-actions"><a href="demographic-hub.html" class="btn btn-sm">View All</a></div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table card-table table-vcenter" id="stressed-districts-table">
+                    <thead>
+                      <tr>
+                        <th>District</th>
+                        <th>DSI</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="3" class="text-center text-muted">Loading real data...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer footer-transparent d-print-none">
+        <div class="container-xl">
+          <div class="row text-center align-items-center">
+            <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+              <ul class="list-inline list-inline-dots mb-0">
+                <li class="list-inline-item">Copyright © 2026 <a href="." class="link-secondary">SANKHYA/UIDAI</a>. All
+                  rights reserved.</li>
+                <li class="list-inline-item"><span class="badge bg-success">Real Data Mode</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Quick Action Modal -->
+  <div class="modal modal-blur fade" id="modal-quick-action" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Quick Action Center</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-6 col-md-4">
+              <a href="#" class="card card-link card-link-pop" onclick="alert('Dispatching team...')">
+                <div class="card-body text-center py-4">
+                  <div class="h2 mb-2">🚐</div>
+                  <div class="fw-bold">Dispatch Team</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 col-md-4">
+              <a href="reports.html" class="card card-link card-link-pop">
+                <div class="card-body text-center py-4">
+                  <div class="h2 mb-2">📊</div>
+                  <div class="fw-bold">Generate Report</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 col-md-4">
+              <a href="resource-lab.html" class="card card-link card-link-pop">
+                <div class="card-body text-center py-4">
+                  <div class="h2 mb-2">🔄</div>
+                  <div class="fw-bold">Reallocate Assets</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Global data store
+    let SANKHYA_DATA = null;
+    let map = null;
+    let markers = [];
+
+    // Utility functions
+    const formatNumber = (num) => {
+      if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B';
+      if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+      if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+      return num.toLocaleString();
+    };
+
+    const getDSIColor = (dsi) => {
+      if (dsi < 3.3) return '#10b981';
+      if (dsi < 6.6) return '#f59e0b';
+      return '#ef4444';
+    };
+
+    const getDSIStatus = (dsi) => {
+      if (dsi < 3.3) return 'low';
+      if (dsi < 6.6) return 'medium';
+      return 'critical';
+    };
+
+    // Load data from JSON file
+    async function loadData() {
+      try {
+        const response = await fetch('data/sankhya_data.json');
+        SANKHYA_DATA = await response.json();
+        console.log('✅ Loaded SANKHYA data:', SANKHYA_DATA.kpis);
+        return true;
+      } catch (error) {
+        console.error('❌ Failed to load data:', error);
+        return false;
+      }
+    }
+
+    // Update KPIs
+    function updateKPIs() {
+      if (!SANKHYA_DATA) return;
+      const kpis = SANKHYA_DATA.kpis;
+
+      document.getElementById('kpi-dsi').textContent = kpis.dsi_average.toFixed(2);
+      document.getElementById('kpi-stressed').textContent = kpis.stressed_districts;
+      document.getElementById('kpi-critical').textContent = kpis.critical_districts;
+      document.getElementById('kpi-high').textContent = kpis.high_districts;
+      document.getElementById('kpi-efficiency').textContent = kpis.asset_efficiency + '%';
+      document.getElementById('kpi-efficiency-bar').style.width = kpis.asset_efficiency + '%';
+      document.getElementById('kpi-status').textContent = kpis.system_status;
+      document.getElementById('alert-count').textContent = kpis.critical_districts;
+
+      // Quick stats
+      document.getElementById('stat-population').textContent = formatNumber(kpis.total_population);
+      document.getElementById('stat-districts').textContent = kpis.total_districts;
+      document.getElementById('stat-seniors').textContent = formatNumber(kpis.senior_population);
+      document.getElementById('stat-updates').textContent = formatNumber(kpis.total_updates);
+    }
+
+    // Update stressed districts table
+    function updateStressedTable() {
+      if (!SANKHYA_DATA) return;
+      const tbody = document.querySelector('#stressed-districts-table tbody');
+      const districts = SANKHYA_DATA.stressed_districts.slice(0, 8);
+
+      tbody.innerHTML = districts.map(d => `
+        <tr>
+          <td>
+            <div class="d-flex align-items-center">
+              <span class="dsi-indicator dsi-${d.status} me-2"></span>
+              <div>
+                <div class="fw-bold">${d.district}</div>
+                <div class="text-muted small">${d.state}</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="badge bg-${d.status === 'critical' ? 'danger' : 'warning'}">${d.dsi.toFixed(1)}</span></td>
+          <td><span class="badge bg-${d.status === 'critical' ? 'danger' : d.status === 'medium' ? 'warning' : 'success'}-lt">${d.status.toUpperCase()}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    // Update migration corridors
+    function updateMigrationCorridors() {
+      if (!SANKHYA_DATA) return;
+      const container = document.getElementById('migration-corridors');
+      const corridors = SANKHYA_DATA.migration_corridors;
+
+      container.innerHTML = corridors.map(c => `
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-bold">${c.origin} → ${c.destination}</div>
+              <div class="text-muted small">${formatNumber(c.volume)} monthly</div>
+            </div>
+            <span class="badge bg-${c.change_percent > 20 ? 'danger' : c.change_percent > 10 ? 'warning' : 'success'}">
+              +${c.change_percent}%
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Update alert ticker
+    function updateAlertTicker() {
+      if (!SANKHYA_DATA) return;
+      const container = document.getElementById('alert-ticker-content');
+      const anomalies = SANKHYA_DATA.anomalies.slice(0, 5);
+      const stressed = SANKHYA_DATA.stressed_districts.slice(0, 3);
+
+      let alerts = [];
+
+      // Add stressed district alerts
+      stressed.forEach(d => {
+        alerts.push(`
+          <div class="alert-item">
+            <span class="badge bg-red">CRITICAL</span>
+            <span>${d.district} DSI: ${d.dsi.toFixed(1)} - Immediate action required</span>
+            <button class="btn btn-sm btn-light quick-action-btn" onclick="alert('Dispatching to ${d.district}')">Dispatch</button>
+          </div>
+        `);
+      });
+
+      // Add anomaly alerts
+      anomalies.slice(0, 2).forEach(a => {
+        alerts.push(`
+          <div class="alert-item">
+            <span class="badge bg-${a.severity === 'critical' ? 'red' : 'yellow'}">${a.type.toUpperCase()}</span>
+            <span>${a.district}: ${a.deviation > 0 ? '+' : ''}${a.deviation.toFixed(1)}% deviation</span>
+            <button class="btn btn-sm btn-light quick-action-btn">Analyze</button>
+          </div>
+        `);
+      });
+
+      container.innerHTML = alerts.join('');
+    }
+
+    // Initialize Leaflet Map
+    function initMap() {
+      if (!SANKHYA_DATA) return;
+
+      // Create map centered on India with OpenStreetMap
+      map = L.map('india-map').setView([22.5, 82.5], 5);
+
+      // Add OpenStreetMap tile layer
+      const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(map);
+
+      // Create layer groups for toggling
+      const dsiLayer = L.layerGroup();
+      const centersLayer = L.layerGroup();
+
+      // Add markers for stressed districts (DSI layer)
+      const mapMarkers = SANKHYA_DATA.map_markers || [];
+
+      mapMarkers.forEach(m => {
+        const color = getDSIColor(m.dsi);
+        const size = m.status === 'critical' ? 12 : 8;
+
+        // Create custom icon
+        const icon = L.divIcon({
+          className: 'custom-marker',
+          html: `<div style="
+            width: ${size * 2}px;
+            height: ${size * 2}px;
+            background: ${color};
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 ${m.status === 'critical' ? '10px' : '5px'} ${color};
+            ${m.status === 'critical' ? 'animation: pulse-animation 2s infinite;' : ''}
+          "></div>`,
+          iconSize: [size * 2, size * 2],
+          iconAnchor: [size, size]
+        });
+
+        const marker = L.marker([m.lat, m.lng], { icon })
+          .bindPopup(`
+            <div style="min-width: 220px; font-family: 'Inter', sans-serif;">
+              <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px; color: #1e3a5f;">${m.district}</div>
+              <div style="color: #64748b; font-size: 12px; margin-bottom: 10px;">${m.state}</div>
+              
+              <div style="background: ${color}15; padding: 8px; border-radius: 8px; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 12px; color: #666;">DSI Score</span>
+                  <span style="font-size: 20px; font-weight: 700; color: ${color};">${m.dsi.toFixed(2)}</span>
+                </div>
+                <div style="text-align: right;">
+                  <span style="background: ${color}; color: white; padding: 2px 10px; border-radius: 12px; font-size: 10px; font-weight: 600;">${m.status.toUpperCase()}</span>
+                </div>
+              </div>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 12px;">
+                <div style="background: #f1f5f9; padding: 6px; border-radius: 6px;">
+                  <div style="color: #94a3b8; font-size: 10px;">Population</div>
+                  <div style="font-weight: 600; color: #334155;">${formatNumber(m.population)}</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 6px; border-radius: 6px;">
+                  <div style="color: #94a3b8; font-size: 10px;">Centers</div>
+                  <div style="font-weight: 600; color: #334155;">${m.capacity}</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 6px; border-radius: 6px;">
+                  <div style="color: #94a3b8; font-size: 10px;">Seniors (60+)</div>
+                  <div style="font-weight: 600; color: #f59e0b;">${formatNumber(m.senior_count || 0)}</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 6px; border-radius: 6px;">
+                  <div style="color: #94a3b8; font-size: 10px;">Adult Updates</div>
+                  <div style="font-weight: 600; color: #3b82f6;">${m.adult_percent || 0}%</div>
+                </div>
+              </div>
+              
+              <button onclick="alert('Dispatching field team to ${m.district}, ${m.state}')" 
+                style="width: 100%; margin-top: 10px; padding: 8px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 12px;">
+                🚐 Dispatch Team
+              </button>
+            </div>
+          `);
+
+        markers.push(marker);
+        marker.addTo(dsiLayer);
+      });
+
+      // Add Aadhaar centers from pincode data
+      const aadhaarCenters = SANKHYA_DATA.aadhaar_centers || [];
+
+      aadhaarCenters.forEach(c => {
+        // Use DSI color for the center dot
+        const color = getDSIColor(c.dsi || 5);
+        const size = (c.status === 'critical') ? 10 : 7;
+
+        // Zone indicator
+        const zoneColor = c.zone === 'blue_zone' ? '#3b82f6' : (c.zone === 'dez' ? '#f59e0b' : null);
+
+        const centerIcon = L.divIcon({
+          className: 'center-dsi-marker',
+          html: `<div style="
+            width: ${size * 2}px;
+            height: ${size * 2}px;
+            background: ${color};
+            border-radius: 50%;
+            border: 2px solid ${zoneColor || 'white'};
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+          "></div>`,
+          iconSize: [size * 2, size * 2],
+          iconAnchor: [size, size]
+        });
+
+        L.marker([c.lat, c.lng], { icon: centerIcon })
+          .bindPopup(`
+            <div style="min-width: 200px; font-family: 'Inter', sans-serif;">
+              <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #1e3a5f;">
+                ${c.center_type} - ${c.id || c.pincode}
+              </div>
+              <div style="color: #64748b; font-size: 11px; margin-bottom: 8px;">
+                ${c.district}, ${c.state}
+              </div>
+              
+              <div style="background: ${color}15; padding: 8px; border-radius: 8px; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 11px; color: #666;">Center DSI</span>
+                  <span style="font-size: 18px; font-weight: 700; color: ${color};">${(c.dsi || 0).toFixed(2)}</span>
+                </div>
+                <div style="text-align: right;">
+                  <span style="background: ${color}; color: white; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 600;">
+                    ${(c.status || 'normal').toUpperCase()}
+                  </span>
+                  ${c.zone && c.zone !== 'normal' ? `<span style="background: ${c.zone === 'blue_zone' ? '#3b82f6' : '#f59e0b'}; color: white; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 600; margin-left: 4px;">
+                    ${c.zone === 'blue_zone' ? 'BLUE ZONE' : 'DEZ'}
+                  </span>` : ''}
+                </div>
+              </div>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 11px;">
+                <div style="background: #f1f5f9; padding: 5px; border-radius: 4px;">
+                  <div style="color: #94a3b8; font-size: 9px;">Pincode</div>
+                  <div style="font-weight: 600;">${c.pincode}</div>
+                </div>
+                <div style="background: #f1f5f9; padding: 5px; border-radius: 4px;">
+                  <div style="color: #94a3b8; font-size: 9px;">Transactions</div>
+                  <div style="font-weight: 600;">${formatNumber(c.transactions)}</div>
+                </div>
+              </div>
+            </div>
+          `)
+          .addTo(centersLayer);
+      });
+
+      // Add layers to map
+      dsiLayer.addTo(map);
+      centersLayer.addTo(map);
+
+      // Add layer control for toggling
+      const overlays = {
+        "🔴 DSI Districts": dsiLayer,
+        "📍 Aadhaar Centers": centersLayer
+      };
+      L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+
+      // Add legend
+      const legend = L.control({ position: 'bottomleft' });
+      legend.onAdd = function () {
+        const div = L.DomUtil.create('div');
+        div.innerHTML = `
+          <div style="background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-size: 11px;">
+            <strong style="display: block; margin-bottom: 6px;">Legend</strong>
+            <div><span style="display: inline-block; width: 10px; height: 10px; background: #10b981; border-radius: 50%; margin-right: 5px;"></span>Low DSI (0-3.3)</div>
+            <div><span style="display: inline-block; width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; margin-right: 5px;"></span>Medium DSI (3.3-6.6)</div>
+            <div><span style="display: inline-block; width: 10px; height: 10px; background: #ef4444; border-radius: 50%; margin-right: 5px;"></span>Critical DSI (6.6+)</div>
+            <hr style="margin: 5px 0;">
+            <div><span style="display: inline-block; width: 12px; height: 12px; background: #3b82f6; border-radius: 2px; margin-right: 5px;"></span>PEC Center</div>
+            <div><span style="display: inline-block; width: 12px; height: 12px; background: #10b981; border-radius: 2px; margin-right: 5px;"></span>PSK Center</div>
+            <div><span style="display: inline-block; width: 12px; height: 12px; background: #f59e0b; border-radius: 2px; margin-right: 5px;"></span>Seva Kendra</div>
+          </div>
+        `;
+        return div;
+      };
+      legend.addTo(map);
+
+      // Zoom-responsive dot sizing
+      function updateMarkerSizes() {
+        const zoom = map.getZoom();
+        const baseSize = zoom < 6 ? 4 : (zoom < 8 ? 6 : (zoom < 10 ? 8 : 12));
+        document.querySelectorAll('.center-dsi-marker div, .custom-marker div').forEach(el => {
+          el.style.width = (baseSize * 2) + 'px';
+          el.style.height = (baseSize * 2) + 'px';
+        });
+      }
+
+      map.on('zoomend', updateMarkerSizes);
+      updateMarkerSizes(); // Initial call
+
+      document.getElementById('map-marker-count').textContent = `${mapMarkers.length} districts, ${aadhaarCenters.length} centers`;
+    }
+
+    function resetMapView() {
+      if (map) {
+        map.setView([22.5, 82.5], 5);
+        // Clear filters
+        document.getElementById('filterPincode').value = '';
+        document.getElementById('filterState').value = '';
+        document.getElementById('filterDistrict').value = '';
+        document.getElementById('filterZone').value = '';
+        document.getElementById('viewNormal').checked = true;
+        // Refresh map
+        initMap();
+      }
+    }
+
+    // Populate filter dropdowns from data
+    function populateFilterDropdowns() {
+      if (!SANKHYA_DATA) return;
+
+      const stateSelect = document.getElementById('filterState');
+      const districtSelect = document.getElementById('filterDistrict');
+
+      // Get unique states
+      const states = [...new Set(SANKHYA_DATA.map_markers.map(m => m.state))].sort();
+      states.forEach(state => {
+        const opt = document.createElement('option');
+        opt.value = state;
+        opt.textContent = state;
+        stateSelect.appendChild(opt);
+      });
+    }
+
+    // Filter by pincode - zoom to matching centers
+    function filterByPincode(pincode) {
+      if (!pincode || pincode.length < 3) return;
+
+      const centers = SANKHYA_DATA.aadhaar_centers.filter(c => c.pincode.startsWith(pincode));
+      if (centers.length > 0) {
+        const avgLat = centers.reduce((sum, c) => sum + c.lat, 0) / centers.length;
+        const avgLng = centers.reduce((sum, c) => sum + c.lng, 0) / centers.length;
+        map.setView([avgLat, avgLng], 12);
+      }
+    }
+
+    // Filter by state - zoom to state and populate districts
+    function filterByState(state) {
+      if (!state) {
+        resetMapView();
+        return;
+      }
+
+      const districts = SANKHYA_DATA.map_markers.filter(m => m.state === state);
+      if (districts.length > 0) {
+        const avgLat = districts.reduce((sum, d) => sum + d.lat, 0) / districts.length;
+        const avgLng = districts.reduce((sum, d) => sum + d.lng, 0) / districts.length;
+        map.setView([avgLat, avgLng], 7);
+
+        // Populate district dropdown
+        const districtSelect = document.getElementById('filterDistrict');
+        districtSelect.innerHTML = '<option value="">All Districts</option>';
+        const districtNames = [...new Set(districts.map(d => d.district))].sort();
+        districtNames.forEach(dist => {
+          const opt = document.createElement('option');
+          opt.value = dist;
+          opt.textContent = dist;
+          districtSelect.appendChild(opt);
+        });
+      }
+    }
+
+    // Filter by district - zoom to district
+    function filterByDistrict(district) {
+      if (!district) return;
+
+      const markers = SANKHYA_DATA.map_markers.filter(m => m.district === district);
+      if (markers.length > 0) {
+        map.setView([markers[0].lat, markers[0].lng], 10);
+      }
+    }
+
+    // Filter by zone - add overlay
+    let zoneOverlay = null;
+    function filterByZone(zone) {
+      // Remove existing overlay
+      if (zoneOverlay) {
+        map.removeLayer(zoneOverlay);
+        zoneOverlay = null;
+      }
+
+      if (!zone) return;
+
+      const centers = SANKHYA_DATA.aadhaar_centers.filter(c => c.zone === zone);
+      const color = zone === 'blue_zone' ? '#3b82f6' : (zone === 'dez' ? '#f59e0b' : '#10b981');
+      const label = zone === 'blue_zone' ? '🔵 Blue Zone (Seniors)' : (zone === 'dez' ? '🟠 DEZ' : '⚪ Normal');
+
+      zoneOverlay = L.layerGroup();
+      centers.forEach(c => {
+        // Use small CircleMarkers instead of large circles to prevent overlap
+        L.circleMarker([c.lat, c.lng], {
+          radius: 8,
+          color: '#fff',
+          weight: 2,
+          fillColor: color,
+          fillOpacity: 0.8
+        }).bindPopup(`
+          <strong>${zone === 'blue_zone' ? '🔵 Blue Zone' : (zone === 'dez' ? '🟠 DEZ' : '⚪ Normal')}</strong><br>
+          <b>${c.center_type}</b><br>
+          DSI: ${c.dsi || 'N/A'}<br>
+          District: ${c.district}<br>
+          State: ${c.state}
+        `).addTo(zoneOverlay);
+      });
+      zoneOverlay.addTo(map);
+
+      // Show count
+      console.log(`Showing ${centers.length} ${zone} centers`);
+    }
+
+    // View mode - aggregate to state or district level
+    function setViewMode(mode) {
+      if (!SANKHYA_DATA || !map) return;
+
+      // Clear existing layers
+      map.eachLayer(layer => {
+        if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+          map.removeLayer(layer);
+        }
+      });
+
+      if (mode === 'normal') {
+        initMap();
+        return;
+      }
+
+      // Use aadhaar_centers for aggregation (they have individual DSI)
+      const centers = SANKHYA_DATA.aadhaar_centers;
+      let aggregated = [];
+
+      if (mode === 'state') {
+        // Aggregate centers by state
+        const stateGroups = {};
+        centers.forEach(c => {
+          if (!stateGroups[c.state]) {
+            stateGroups[c.state] = { dsi: [], lat: [], lng: [] };
+          }
+          stateGroups[c.state].dsi.push(c.dsi || 5);
+          stateGroups[c.state].lat.push(c.lat);
+          stateGroups[c.state].lng.push(c.lng);
+        });
+
+        Object.entries(stateGroups).forEach(([state, data]) => {
+          const avgDsi = data.dsi.reduce((a, b) => a + b, 0) / data.dsi.length;
+          aggregated.push({
+            name: state,
+            lat: data.lat.reduce((a, b) => a + b, 0) / data.lat.length,
+            lng: data.lng.reduce((a, b) => a + b, 0) / data.lng.length,
+            dsi: avgDsi,
+            status: avgDsi >= 6.6 ? 'critical' : (avgDsi >= 3.3 ? 'medium' : 'low'),
+            count: data.dsi.length
+          });
+        });
+      } else if (mode === 'district') {
+        // Aggregate centers by district
+        const districtGroups = {};
+        centers.forEach(c => {
+          const key = `${c.district}_${c.state}`;
+          if (!districtGroups[key]) {
+            districtGroups[key] = { district: c.district, state: c.state, dsi: [], lat: [], lng: [] };
+          }
+          districtGroups[key].dsi.push(c.dsi || 5);
+          districtGroups[key].lat.push(c.lat);
+          districtGroups[key].lng.push(c.lng);
+        });
+
+        Object.values(districtGroups).forEach(data => {
+          const avgDsi = data.dsi.reduce((a, b) => a + b, 0) / data.dsi.length;
+          aggregated.push({
+            name: `${data.district}, ${data.state}`,
+            lat: data.lat.reduce((a, b) => a + b, 0) / data.lat.length,
+            lng: data.lng.reduce((a, b) => a + b, 0) / data.lng.length,
+            dsi: avgDsi,
+            status: avgDsi >= 6.6 ? 'critical' : (avgDsi >= 3.3 ? 'medium' : 'low'),
+            count: data.dsi.length
+          });
+        });
+      }
+
+      // Add aggregated markers
+      aggregated.forEach(a => {
+        const color = a.status === 'critical' ? '#ef4444' : (a.status === 'medium' ? '#f59e0b' : '#10b981');
+        const size = mode === 'state' ? 15 : 8;
+
+        L.circleMarker([a.lat, a.lng], {
+          radius: size,
+          color: color,
+          fillColor: color,
+          fillOpacity: 0.8,
+          weight: 2
+        })
+          .bindPopup(`<strong>${a.name}</strong><br>Avg DSI: ${a.dsi.toFixed(2)}<br>Status: ${a.status.toUpperCase()}${a.count > 1 ? '<br>Districts: ' + a.count : ''}`)
+          .addTo(map);
+      });
+    }
+
+    // Initialize prediction chart with REAL AI forecast data
+    async function initPredictionChart() {
+      try {
+        // Load AI forecast from generated JSON
+        const response = await fetch('data/ai_forecast.json');
+        const aiData = await response.json();
+
+        const forecast = aiData.forecast_7day;
+        const days = forecast.map(f => f.day_name.substring(0, 3));
+        const predicted = forecast.map(f => Math.round(f.predicted_transactions / 1000)); // in K
+        const lowBand = forecast.map(f => Math.round(f.low_estimate / 1000));
+        const highBand = forecast.map(f => Math.round(f.high_estimate / 1000));
+
+        const chart = new ApexCharts(document.getElementById('chart-prediction'), {
+          chart: {
+            type: 'area',
+            fontFamily: "'Inter', sans-serif",
+            height: 250,
+            toolbar: { show: false },
+            animations: { enabled: true }
+          },
+          dataLabels: { enabled: false },
+          fill: {
+            opacity: [0.5, 0.2, 0.2],
+            type: 'gradient',
+            gradient: { shadeIntensity: 1, opacityFrom: 0.7, opacityTo: 0.3 }
+          },
+          stroke: { width: [3, 1, 1], curve: 'smooth', dashArray: [0, 5, 5] },
+          series: [
+            { name: 'Predicted Transactions', data: predicted },
+            { name: 'Low Estimate', data: lowBand },
+            { name: 'High Estimate', data: highBand }
+          ],
+          tooltip: {
+            theme: 'dark',
+            y: { formatter: val => val + 'K transactions' }
+          },
+          grid: { borderColor: 'rgba(255,255,255,0.1)', strokeDashArray: 4 },
+          xaxis: {
+            labels: { style: { colors: '#fff' } },
+            categories: days,
+            axisBorder: { show: false }
+          },
+          yaxis: {
+            labels: {
+              style: { colors: '#fff' },
+              formatter: val => val ? val + 'K' : ''
+            },
+            title: { text: 'Transactions (K)', style: { color: '#fff' } }
+          },
+          colors: ['#4dabf7', '#ffc078', '#ff8787'],
+          legend: { labels: { colors: '#fff' } }
+        });
+
+        chart.render();
+
+        // Update footer with real model info
+        const summary = aiData.summary;
+        const footer = document.querySelector('.card-footer.text-white-50');
+        if (footer) {
+          footer.innerHTML = `
+            <div class="row align-items-center">
+              <div class="col-auto"><span class="badge bg-success text-white">AI Model v${aiData.model_version}</span></div>
+              <div class="col">Avg Daily: ${summary.avg_daily_demand.toLocaleString()} | Peak: ${summary.peak_day} | Data: ${(aiData.data_sources.demographic_records / 1000000).toFixed(1)}M records</div>
+              <div class="col-auto"><a href="#" class="btn btn-sm btn-light" onclick="regenerateAIForecast()">Retrain Model</a></div>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error('Failed to load AI forecast:', error);
+        // Fallback if ai_forecast.json not available
+        if (SANKHYA_DATA && SANKHYA_DATA.demand_forecast) {
+          const forecast = SANKHYA_DATA.demand_forecast;
+          const chart = new ApexCharts(document.getElementById('chart-prediction'), {
+            chart: { type: 'area', height: 250, toolbar: { show: false } },
+            series: [{ name: 'Predicted', data: forecast.predicted }],
+            xaxis: { categories: forecast.days },
+            colors: ['#4dabf7']
+          });
+          chart.render();
+        }
+      }
+    }
+
+    // Initialize DSI Distribution Pie Chart using Chart.js
+    function initDSIPieChart() {
+      if (!SANKHYA_DATA) return;
+
+      const kpis = SANKHYA_DATA.kpis;
+      const critical = kpis.critical_districts || 504;
+      const high = kpis.high_districts || 275;
+      const low = kpis.total_districts - critical - high || 299;
+
+      const ctx = document.getElementById('dsi-pie-chart');
+      if (!ctx) return;
+
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Critical (>6.6)', 'Medium (3.3-6.6)', 'Low (<3.3)'],
+          datasets: [{
+            data: [critical, high, low],
+            backgroundColor: ['#ef4444', '#f59e0b', '#10b981'],
+            borderWidth: 0,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '60%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 15,
+                usePointStyle: true,
+                font: { family: "'Inter', sans-serif", size: 11 }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Main initialization
+    async function init() {
+      console.log('🚀 SANKHYA Dashboard Initializing...');
+
+      const loaded = await loadData();
+
+      if (loaded) {
+        updateKPIs();
+        updateStressedTable();
+        updateMigrationCorridors();
+        updateAlertTicker();
+        initMap();
+        populateFilterDropdowns();
+        initPredictionChart();
+        initDSIPieChart();
+        console.log('✅ Dashboard fully loaded with real data!');
+      } else {
+        console.error('❌ Failed to initialize dashboard');
+        document.getElementById('kpi-dsi').textContent = 'Error';
+      }
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Settings - SANKHYA | UIDAI Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="layout-fluid with-strips">
+    <!-- Decorative Flag Strips -->
+    <div class="flag-strip-top"></div>
+    <div class="flag-strip-bottom"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/demo-theme.min.js"></script>
+
+    <div class="page">
+        <!-- Sidebar -->
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h1 class="navbar-brand navbar-brand-autodark">
+                    <a href="index.html">
+                        <img src="images/sankhya_logo.png" alt="SANKHYA" height="40" style="margin-right: 8px;">
+                    </a>
+                </h1>
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <ul class="navbar-nav pt-lg-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 4h6v8h-6z" />
+                                        <path d="M4 16h6v4h-6z" />
+                                        <path d="M14 12h6v8h-6z" />
+                                        <path d="M14 4h6v4h-6z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">Command Center</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profile.html">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="settings.html">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                        <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <div class="page-wrapper">
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <h2 class="page-title">Settings</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="card">
+                        <div class="row g-0">
+                            <!-- Settings Navigation -->
+                            <div class="col-12 col-md-3 border-end">
+                                <div class="card-body">
+                                    <h4 class="subheader">Account Settings</h4>
+                                    <div class="list-group list-group-transparent">
+                                        <a href="#account"
+                                            class="list-group-item list-group-item-action d-flex align-items-center active">
+                                            My Account
+                                        </a>
+                                        <a href="#notifications"
+                                            class="list-group-item list-group-item-action d-flex align-items-center">
+                                            Notifications
+                                        </a>
+                                        <a href="#privacy"
+                                            class="list-group-item list-group-item-action d-flex align-items-center">
+                                            Privacy & Security
+                                        </a>
+                                        <a href="#appearance"
+                                            class="list-group-item list-group-item-action d-flex align-items-center">
+                                            Appearance
+                                        </a>
+                                        <a href="#integrations"
+                                            class="list-group-item list-group-item-action d-flex align-items-center">
+                                            Integrations
+                                        </a>
+                                    </div>
+                                    <h4 class="subheader mt-4">Dashboard Settings</h4>
+                                    <div class="list-group list-group-transparent">
+                                        <a href="#dashboardPrefs"
+                                            class="list-group-item list-group-item-action">Dashboard Preferences</a>
+                                        <a href="#alertPrefs" class="list-group-item list-group-item-action">Alert
+                                            Configuration</a>
+                                        <a href="#dataPrefs" class="list-group-item list-group-item-action">Data
+                                            Sources</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settings Content -->
+                            <div class="col-12 col-md-9 d-flex flex-column">
+                                <div class="card-body">
+                                    <h2 class="mb-4">My Account</h2>
+
+                                    <h3 class="card-title">Profile</h3>
+                                    <div class="row align-items-center mb-3">
+                                        <div class="col-auto">
+                                            <span class="avatar avatar-xl"
+                                                style="background-image: url(https://ui-avatars.com/api/?name=Admin+User&background=206bc4&color=fff&size=128)"></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#" class="btn">Change avatar</a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#" class="btn btn-ghost-danger">Delete avatar</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" value="Admin">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" value="User">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="admin@sankhya.gov.in">
+                                    </div>
+
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Phone</label>
+                                            <input type="tel" class="form-control" value="+91 98765 43210">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Location</label>
+                                            <select class="form-select">
+                                                <option value="north" selected>North India</option>
+                                                <option value="south">South India</option>
+                                                <option value="east">East India</option>
+                                                <option value="west">West India</option>
+                                                <option value="central">Central India</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Bio</label>
+                                        <textarea class="form-control" rows="3"
+                                            placeholder="Tell something about yourself">Senior Administrator managing North India operations for SANKHYA dashboard.</textarea>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <h3 class="card-title">Notifications</h3>
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="notifEmail" checked>
+                                            <label class="form-check-label" for="notifEmail">Email notifications</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="notifPush" checked>
+                                            <label class="form-check-label" for="notifPush">Push notifications</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="notifSMS">
+                                            <label class="form-check-label" for="notifSMS">SMS notifications</label>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="subheader">Alert Preferences</h4>
+                                    <div class="mb-3">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" id="alertCritical" checked>
+                                            <label class="form-check-label" for="alertCritical">
+                                                <span class="badge bg-danger me-1">Critical</span> DSI alerts (8.0+)
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" id="alertHigh" checked>
+                                            <label class="form-check-label" for="alertHigh">
+                                                <span class="badge bg-warning me-1">High</span> DSI alerts (6.0-8.0)
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" id="alertMedium">
+                                            <label class="form-check-label" for="alertMedium">
+                                                <span class="badge bg-info me-1">Medium</span> DSI alerts (3.0-6.0)
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" id="alertSystem" checked>
+                                            <label class="form-check-label" for="alertSystem">
+                                                <span class="badge bg-secondary me-1">System</span> Health alerts
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <h3 class="card-title">Password</h3>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Current Password</label>
+                                            <input type="password" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">New Password</label>
+                                            <input type="password" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Confirm Password</label>
+                                            <input type="password" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <h3 class="card-title">Two-Factor Authentication</h3>
+                                    <p class="text-secondary">Add an extra layer of security to your account.</p>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="me-3">
+                                            <span class="badge bg-success-lt text-success">Enabled</span>
+                                        </div>
+                                        <div>
+                                            <a href="#" class="btn btn-outline-primary">Reconfigure 2FA</a>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <h3 class="card-title text-danger">Danger Zone</h3>
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="mb-0">Once you delete your account, there is no going back.</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#modal-danger">
+                                                Delete Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer bg-transparent mt-auto">
+                                    <div class="btn-list justify-content-end">
+                                        <a href="index.html" class="btn">Cancel</a>
+                                        <a href="#" class="btn btn-primary">Save Changes</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-transparent d-print-none">
+                <div class="container-xl">
+                    <div class="row text-center align-items-center">
+                        <div class="col-12">
+                            Copyright &copy; 2026 <a href="." class="link-secondary">SANKHYA/UIDAI</a>. All rights
+                            reserved.
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 9v4" />
+                        <path
+                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" />
+                        <path d="M12 16h.01" />
+                    </svg>
+                    <h3>Are you sure?</h3>
+                    <div class="text-secondary">Do you really want to delete your account? This action cannot be undone.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn w-100" data-bs-dismiss="modal">Cancel</a>
+                            </div>
+                            <div class="col">
+                                <a href="#" class="btn btn-danger w-100" data-bs-dismiss="modal">Delete Account</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+
+</html>
