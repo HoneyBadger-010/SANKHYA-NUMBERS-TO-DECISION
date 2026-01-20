@@ -1,0 +1,169 @@
+{
+    "districts": [
+        {
+            "id": 1,
+            "name": "Varanasi",
+            "state": "UP",
+            "dsi": 8.7,
+            "population": 3676841,
+            "centers": 124
+        },
+        {
+            "id": 2,
+            "name": "Patna",
+            "state": "Bihar",
+            "dsi": 8.3,
+            "population": 5838465,
+            "centers": 156
+        },
+        {
+            "id": 3,
+            "name": "Lucknow",
+            "state": "UP",
+            "dsi": 7.6,
+            "population": 4589838,
+            "centers": 189
+        },
+        {
+            "id": 4,
+            "name": "Gaya",
+            "state": "Bihar",
+            "dsi": 7.2,
+            "population": 4391418,
+            "centers": 98
+        },
+        {
+            "id": 5,
+            "name": "Indore",
+            "state": "MP",
+            "dsi": 6.9,
+            "population": 3272335,
+            "centers": 134
+        },
+        {
+            "id": 6,
+            "name": "Jaipur",
+            "state": "Rajasthan",
+            "dsi": 5.4,
+            "population": 6626178,
+            "centers": 245
+        },
+        {
+            "id": 7,
+            "name": "Mumbai",
+            "state": "Maharashtra",
+            "dsi": 3.2,
+            "population": 12442373,
+            "centers": 567
+        },
+        {
+            "id": 8,
+            "name": "Bangalore",
+            "state": "Karnataka",
+            "dsi": 2.8,
+            "population": 8443675,
+            "centers": 423
+        },
+        {
+            "id": 9,
+            "name": "Chennai",
+            "state": "Tamil Nadu",
+            "dsi": 2.5,
+            "population": 4681087,
+            "centers": 298
+        },
+        {
+            "id": 10,
+            "name": "Kolkata",
+            "state": "West Bengal",
+            "dsi": 4.1,
+            "population": 4496694,
+            "centers": 312
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "name": "Admin User",
+            "email": "admin@sankhya.gov.in",
+            "role": "admin",
+            "region": "North India"
+        },
+        {
+            "id": 2,
+            "name": "Sarah Khan",
+            "email": "sarah.k@sankhya.gov.in",
+            "role": "operator",
+            "region": "Central India"
+        },
+        {
+            "id": 3,
+            "name": "John Doe",
+            "email": "john.d@sankhya.gov.in",
+            "role": "operator",
+            "region": "East India"
+        },
+        {
+            "id": 4,
+            "name": "Priya Sharma",
+            "email": "priya.s@sankhya.gov.in",
+            "role": "viewer",
+            "region": "South India"
+        }
+    ],
+    "kpi_history": {
+        "dsi_average": [
+            4.8,
+            4.6,
+            4.5,
+            4.4,
+            4.32
+        ],
+        "stressed_districts": [
+            52,
+            50,
+            49,
+            48,
+            47
+        ],
+        "asset_efficiency": [
+            72.1,
+            74.3,
+            75.8,
+            77.2,
+            78.4
+        ]
+    },
+    "migration_corridors": [
+        {
+            "from": "Bihar",
+            "to": "Delhi",
+            "monthly_volume": 124000,
+            "trend": "+42%"
+        },
+        {
+            "from": "UP",
+            "to": "Maharashtra",
+            "monthly_volume": 98000,
+            "trend": "+28%"
+        },
+        {
+            "from": "Rajasthan",
+            "to": "Gujarat",
+            "monthly_volume": 67000,
+            "trend": "+12%"
+        },
+        {
+            "from": "MP",
+            "to": "Karnataka",
+            "monthly_volume": 54000,
+            "trend": "+5%"
+        },
+        {
+            "from": "Odisha",
+            "to": "Tamil Nadu",
+            "monthly_volume": 41000,
+            "trend": "+3%"
+        }
+    ]
+}
