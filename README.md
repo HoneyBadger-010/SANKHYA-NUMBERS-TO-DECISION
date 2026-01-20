@@ -54,6 +54,20 @@ python app.py
 | **Migration detection** | shows major migration activity |
 
 
+**Deviation Thresholds**:
+| Range | Status | Action |
+|-------|--------|--------|
+| ±0 to ±20% | ✅ Normal | No action required |
+| ±20% to ±40% | ⚠️ Warning | Monitor closely |
+| > ±40% | 🚨 Critical | Immediate investigation |
+
+**Use Case**: Detects unusual cross-border migration patterns that may indicate:
+- Mass migration events
+- Data anomalies
+- Potential fraud patterns
+- System issues
+
+
 ### Interactive Map
 - 1,000+ district markers with DSI coloring
 - 300+ Aadhaar center locations
@@ -160,6 +174,7 @@ Developed for **UIDAI Hackathon**
 MIT License
 
 ---
+
 
 
 
