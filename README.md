@@ -134,10 +134,23 @@ Where:
 ---
 
 ## 👥 Team
+SCREENSHOTS FOR THE WEBSITE <img width="1366" height="609" alt="setting" src="https://github.com/user-attachments/assets/7c7d8abb-4ab0-46eb-81cd-1fb88b2784fe" />
+<img width="1366" height="613" alt="resource lab" src="https://github.com/user-attachments/assets/520ab1b4-2b11-48b7-a29b-48b5879da708" />
+<img width="1366" height="609" alt="reports" src="https://github.com/user-attachments/assets/a6b4f36d-8c7c-4a1d-957c-d516c141f343" />
+<img width="1366" height="610" alt="migration" src="https://github.com/user-attachments/assets/18d50dfb-ca2f-499c-bf34-dbab26d68a97" />
+
+<img width="1366" height="609" alt="login" src="https://github.com/user-attachments/assets/9b8478c8-6346-4cdd-93ad-5e50cabe7c5e" />
+<img width="1366" height="611" alt="demographic" src="https://github.com/user-attachments/assets/f1be0306-dd53-4dc5-a50d-086afb75359b" />
+<img width="1366" height="609" alt="dashboard3" src="https://github.com/user-attachments/assets/6064fe85-10d1-4f84-81d8-96e03c69f8b1" />
+<img width="1366" height="611" alt="dashboard2" src="https://github.com/user-attachments/assets/4aefd22e-66ea-4b8d-9e8a-4d10590213cc" />
+
+<img width="1366" height="610" alt="dashboard" src="https://github.com/user-attachments/assets/0c9b5299-6609-4c0b-b217-7d9889ac07eb" />
+<img width="1366" height="612" alt="system health" src="https://github.com/user-attachments/assets/2747103d-5ffc-44af-96dc-1f6442bdad54" />
 
 Developed for **UIDAI Hackathon** - Predictive Governance Challenge
 
 ---
+
 
 ## 📄 License
 
@@ -146,3 +159,4 @@ MIT License
 ---
 
 *Built with ❤️ for data-driven governance*
+
